@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bdc9d4ffb59904bba154ac96b738d7, type: 3}
+  m_Name: Skill 5
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSO
+  key: 53
+  skillPrefab: {fileID: 2990468006285254152, guid: f573e8c4dfd1bfb4d88f4afa8e9ba976, type: 3}
+  targetImage: {fileID: 2612146480858302840, guid: b88a0d7b5916c4c47affeb5ae16e6b86, type: 3}
+  costMP: 25
+  timeFill: 6

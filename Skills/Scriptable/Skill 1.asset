@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Skill 1
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSO
+  key: 49
+  skillPrefab: {fileID: 351020217176251115, guid: 7425868bdcf482c41b5bfe0c4759acb3, type: 3}
+  targetImage: {fileID: 5833720266259527893, guid: f14cfa2b1a7987446a9d93acf13dde4d, type: 3}
+  costMP: 16
+  timeFill: 2
+  isPlayerToEnemy: 0

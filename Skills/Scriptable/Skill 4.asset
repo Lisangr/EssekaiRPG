@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bdc9d4ffb59904bba154ac96b738d7, type: 3}
+  m_Name: Skill 4
+  m_EditorClassIdentifier: Assembly-CSharp::SkillSO
+  key: 52
+  skillPrefab: {fileID: 2990468006285254152, guid: f573e8c4dfd1bfb4d88f4afa8e9ba976, type: 3}
+  targetImage: {fileID: 3522681679397129913, guid: 28bdad0a8c4e778408c45fcde551eb7d, type: 3}
+  costMP: 20
+  timeFill: 7
