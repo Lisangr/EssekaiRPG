@@ -19,6 +19,7 @@ public class CooldownScript : MonoBehaviour
     void Start()
     {
         playerObject = FindObjectOfType<Player>().GetComponent<Player>();
+        player = FindObjectOfType<Player>().GetComponent<Transform>();
         maxMP = playerObject.MaxMP;
         currentMP = maxMP;
 

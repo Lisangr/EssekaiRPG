@@ -4,7 +4,7 @@ using Cinemachine;
 
 public class ObjectChecker : MonoBehaviour
 {
-    public Text interactionText; // UI текст для отображения сообщения
+    public Text pressFText; // UI текст для отображения сообщения
     public string[] interactableObjects; // Список имен объектов для взаимодействия
 
     public delegate void PlayerAction();
@@ -14,7 +14,7 @@ public class ObjectChecker : MonoBehaviour
 
     void Start()
     {
-        interactionText.gameObject.SetActive(false); // Скрываем текст по умолчанию
+        pressFText.gameObject.SetActive(false); // Скрываем текст по умолчанию
     }
 
     void Update()
@@ -23,7 +23,8 @@ public class ObjectChecker : MonoBehaviour
         if (currentInteractableObject != null && Input.GetKeyDown(KeyCode.F))
         {
             InteractWithObject(currentInteractableObject);
-            interactionText.gameObject.SetActive(false);
+            pressFText.gameObject.SetActive(false);
+
         }
     }
 
@@ -31,8 +32,8 @@ public class ObjectChecker : MonoBehaviour
     {
         if (IsInteractable(other.gameObject))
         {
-            interactionText.text = "Нажмите F";
-            interactionText.gameObject.SetActive(true);
+            pressFText.text = "Нажмите F";
+            pressFText.gameObject.SetActive(true);
             currentInteractableObject = other.gameObject;            
         }
     }
@@ -41,7 +42,7 @@ public class ObjectChecker : MonoBehaviour
     {
         if (currentInteractableObject == other.gameObject)
         {
-            interactionText.gameObject.SetActive(false);
+            pressFText.gameObject.SetActive(false);
             currentInteractableObject = null;            
         }
     }

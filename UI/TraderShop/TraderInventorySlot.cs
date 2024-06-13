@@ -18,18 +18,22 @@ public class TraderInventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDr
     private CanvasGroup canvasGroup;
     private TraderInventoryUI inventoryUI;
     private GameObject draggingIcon;
+    private InventoryWeight inventoryWeight;
+    private InventoryWallet inventoryWallet;
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         inventoryUI = FindObjectOfType<TraderInventoryUI>();
+        inventoryWeight = FindObjectOfType<InventoryWeight>(); // Находим InventoryWeight
     }
 
     private void Start()
     {
-        inventoryUIManager = FindObjectOfType<InventoryUI>();      
+        inventoryUIManager = FindObjectOfType<InventoryUI>();
+        inventoryWallet = FindObjectOfType<InventoryWallet>();
     }
-    
+
     public void AddItem(string newItemName, int quantity)
     {
         itemName = newItemName;
@@ -47,7 +51,7 @@ public class TraderInventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDr
             quantityText.text = "";
         }
     }
-    
+
     public void SetItem(Item newItem)
     {
         item = newItem;
@@ -65,18 +69,30 @@ public class TraderInventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDr
 
     private void AddItemToPlayerInventory()
     {
-        if (ItemPickup.itemInventory.ContainsKey(item.itemName))
+        if (InventoryWallet.currentMoney >= item.buyPrice)
         {
-            ItemPickup.itemInventory[item.itemName] += 1;
+            inventoryWeight.AddWeight(item.itemWeight);
+
+            inventoryWallet.RemoveMoney(item.buyPrice);
+            Debug.Log("---===Потрачено " + item.buyPrice + " денег===---");
+
+            if (ItemPickup.itemInventory.ContainsKey(item.itemName))
+            {
+                ItemPickup.itemInventory[item.itemName] += 1;
+            }
+            else
+            {
+                ItemPickup.itemInventory.Add(item.itemName, item.quantity);
+            }
+
+            if (inventoryUIManager != null)
+            {
+                inventoryUIManager.UpdateUI();
+            }
         }
         else
         {
-            ItemPickup.itemInventory.Add(item.itemName, item.quantity);
-        }
-
-        if (inventoryUIManager != null)
-        {
-            inventoryUIManager.UpdateUI();
+            Debug.Log("А ДЕНЕГ ТО НЕТ... ПЕЧАЛЬ ((((");
         }
     }
 
@@ -107,71 +123,43 @@ public class TraderInventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDr
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true;
-        if (draggingIcon != null)
-        {
-            Destroy(draggingIcon);
-        }
-
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.GetComponent<InventorySlot>() != null)
+            canvasGroup.blocksRaycasts = true;
+            if (draggingIcon != null)
             {
-                InventorySlot targetSlot = result.gameObject.GetComponent<InventorySlot>();
+                Destroy(draggingIcon);
+            }
 
-                if (targetSlot != this)
+            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+            pointerEventData.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, results);
+
+        if (InventoryWallet.currentMoney >= item.buyPrice)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.GetComponent<InventorySlot>() != null)
                 {
-                    string tempItemName = targetSlot.itemName;
-                    int tempItemQuantity = targetSlot.itemQuantity;
-                    targetSlot.AddItem(itemName, itemQuantity);
+                    InventorySlot targetSlot = result.gameObject.GetComponent<InventorySlot>();
 
-                    AddItemToPlayerInventory();
+                    if (targetSlot != this)
+                    {
+                        string tempItemName = targetSlot.itemName;
+                        int tempItemQuantity = targetSlot.itemQuantity;
+                        targetSlot.AddItem(itemName, itemQuantity);
 
-                    break;
+                        AddItemToPlayerInventory();
+                        break;
+                    }
                 }
             }
+        }
+        else
+        {
+
         }
     }
-    /*
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.blocksRaycasts = true;
-        if (draggingIcon != null)
-        {
-            Destroy(draggingIcon);
-        }
 
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.GetComponent<InventorySlot>() != null)
-            {
-                InventorySlot targetSlot = result.gameObject.GetComponent<InventorySlot>();
-
-                if (targetSlot != this)
-                {
-                    string tempItemName = targetSlot.itemName;
-                    int tempItemQuantity = targetSlot.itemQuantity;
-                    targetSlot.AddItem(itemName, itemQuantity);                    
-                    
-                    AddItemToPlayerInventory();                             
-                    AddItem(tempItemName, tempItemQuantity);
-
-                    break;
-                }
-            }
-        }       
-    }*/
-    
     public void ClearSlot()
     {
         itemName = null;

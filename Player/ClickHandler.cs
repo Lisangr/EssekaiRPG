@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ClickHandler : MonoBehaviour
 {
-    public TextMeshProUGUI textMeshPro; // —сылка на элемент TMPro
+    public TextMeshProUGUI targetText; // —сылка на элемент TMPro
     public static Transform enemyPosition;
     public static float distance;
     public static string tempID;
@@ -18,7 +18,7 @@ public class ClickHandler : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject clickedObject = hit.collider.gameObject;
-                textMeshPro.text = clickedObject.name;
+                targetText.text = clickedObject.name;
 
                 if (Physics.Raycast(transform.position, clickedObject.transform.position - transform.position, out hit))
                 {

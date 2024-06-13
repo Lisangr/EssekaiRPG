@@ -8,4 +8,7 @@ public class Item : ScriptableObject
     public GameObject prefab = null;
     public Sprite icon = null;
     public int quantity = 1;
+    public int sellPrice;
+    public int buyPrice;
+    public int itemWeight;
 }

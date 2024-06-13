@@ -9,7 +9,7 @@ public class ForCMCameras : MonoBehaviour
     public GameObject traderPanel;
     public GameObject playerInventoryPanel;
 
-    private bool isCMActiveted =false;
+    public bool isCMActiveted =false;
 
     public delegate void PlayerAction();
     public static event PlayerAction GoAwayFromNPC;

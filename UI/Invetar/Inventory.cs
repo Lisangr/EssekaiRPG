@@ -6,11 +6,12 @@ public class Inventory : MonoBehaviour
     public int space = 10;
     public List<Item> allItems; // Список всех возможных предметов
     private InventoryUI inventoryUIManager;
+    private InventoryWeight inventoryWeight;
     private void Awake()
     {
-        inventoryUIManager = FindObjectOfType<InventoryUI>(); // Находим InventoryUIManager
+        inventoryUIManager = FindObjectOfType<InventoryUI>();
+        inventoryWeight = FindObjectOfType<InventoryWeight>(); // Находим InventoryWeight// Находим InventoryUIManager
         InitializeInventory();
-       
     }
     private void InitializeInventory()
     {
@@ -19,10 +20,12 @@ public class Inventory : MonoBehaviour
             if (ItemPickup.itemInventory.ContainsKey(item.itemName))
             {
                 ItemPickup.itemInventory[item.itemName]++;
+                inventoryWeight.AddWeight(item.itemWeight);
             }
             else if (ItemPickup.itemInventory.Count < space)
             {
                 ItemPickup.itemInventory.Add(item.itemName, 1);
+                inventoryWeight.AddWeight(item.itemWeight);
             }
         }
     }
