@@ -10,5 +10,6 @@ public class SkillSO : ScriptableObject
     public int costMP;
     public float timeFill;
     public bool isPlayerToEnemy; // Направление, если false, то от врага к игроку, например вампирик
-    
+    public int damage = 0;
+    public int healing;
 }

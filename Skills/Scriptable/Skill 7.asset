@@ -18,3 +18,5 @@ MonoBehaviour:
   costMP: 29
   timeFill: 9
   isPlayerToEnemy: 1
+  damage: 0
+  healing: 20

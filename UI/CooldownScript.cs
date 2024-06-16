@@ -12,8 +12,9 @@ public class CooldownScript : MonoBehaviour
     private Player playerObject;
     public static int currentMP, maxMP;
     public TextMeshProUGUI mpText; // Добавьте ссылку на текстовое поле
-
     public int manaRegenAmount = 10; // Количество восстанавливаемой маны
+
+    private EnemyMainInfo enemyMainInfo;
     private float manaRegenInterval = 3f; // Интервал восстановления маны в секундах
     private float manaRegenTimer;
     void Start()
@@ -74,7 +75,12 @@ public class CooldownScript : MonoBehaviour
         if (currentMP >= skill.costMP)
         {
             currentMP -= skill.costMP;
-            Debug.Log("Skill used: " + skill.name + ". Remaining MP: " + currentMP);
+
+            enemyMainInfo = FindObjectOfType<EnemyMainInfo>();
+            enemyMainInfo.TakeMagicDamage(skill.healing);
+            enemyMainInfo.TakePhisicalDamage(skill.damage);
+
+            Debug.Log("Скилл использован" + skill.name + "маны потрачено" + currentMP);
         }
         else
         {

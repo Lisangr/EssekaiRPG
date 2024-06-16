@@ -18,12 +18,12 @@ public class EnemyDetector : MonoBehaviour
     private Transform playerTransform;
     private bool playerIsOurTarget;
     private GameObject currentTree;
-    private MainInfo mainInfo;
+    private EnemyMainInfo enemyMainInfo;
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        mainInfo = GetComponent<MainInfo>();
+        enemyMainInfo = GetComponent<EnemyMainInfo>();
         animator = GetComponent<Animator>();
         playerIsOurTarget = false;
     }
@@ -40,7 +40,7 @@ public class EnemyDetector : MonoBehaviour
             {
                 navMeshAgent.isStopped = true;
                 animator.SetTrigger("Attack");
-                mainInfo.OnAttak();
+                enemyMainInfo.OnAttak();
             }
             else
             {
@@ -65,7 +65,7 @@ public class EnemyDetector : MonoBehaviour
             currentTree.transform.position) <= chopDistance)
         {
             animator.SetTrigger("Attack");
-            mainInfo.OnAttak();
+            enemyMainInfo.OnAttak();
         }
     }
 

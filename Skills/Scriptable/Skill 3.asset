@@ -17,3 +17,6 @@ MonoBehaviour:
   targetImage: {fileID: 7730333432568499857, guid: cb51d86e7c2774440a6a43726a63c871, type: 3}
   costMP: 15
   timeFill: 5
+  isPlayerToEnemy: 0
+  damage: 1
+  healing: 1
