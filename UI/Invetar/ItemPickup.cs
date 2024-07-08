@@ -18,15 +18,24 @@ public class ItemPickup : MonoBehaviour
         inventoryWeight = FindObjectOfType<InventoryWeight>(); // Находим InventoryWeight
     }
 
-    private void Start()
+    public void InitializeItem()
     {
         itemName = item.itemName;
-        uniqueID = Guid.NewGuid().ToString(); // Генерация уникального идентификатора
+        uniqueID = Guid.NewGuid().ToString();
+        Debug.Log($"Initialized item: {itemName} with ID: {uniqueID}");
+    }
+
+    private void Start()
+    {
+        if (string.IsNullOrEmpty(itemName))
+        {
+            InitializeItem();
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && (ClickHandler.tempID == uniqueID) 
+        if (Input.GetKeyDown(KeyCode.F) && (ClickHandler.tempID == uniqueID)
             && (ClickHandler.distance <= 8f))
         {
             AddItemToInventory();
@@ -38,7 +47,7 @@ public class ItemPickup : MonoBehaviour
 
     public void AddItemToInventory()
     {
-        if (inventoryWeight.AddWeight(item.itemWeight))//добавлено для веса
+        if (inventoryWeight.AddWeight(item.itemWeight)) // добавлено для веса
         {
             // Проверяем, есть ли предмет уже в инвентаре
             if (itemInventory.ContainsKey(itemName))
@@ -52,59 +61,39 @@ public class ItemPickup : MonoBehaviour
                 itemInventory.Add(itemName, itemQuantity);
             }
 
-            // Обновляем UI инвентаря
-            if (inventoryUIManager != null)
+            Debug.Log($"Added item: {itemName} to inventory. Total quantity: {itemInventory[itemName]}");
+
+            // Обновляем UI инвентаря, если он активен
+            if (inventoryUIManager != null && inventoryUIManager.gameObject.activeInHierarchy)
             {
                 inventoryUIManager.UpdateUI();
             }
         }
     }
     /*
-    public Item item;
-    [HideInInspector] public string itemName;
-    [HideInInspector] public int itemQuantity = 1;
-    [HideInInspector] public string uniqueID;
-    public static Dictionary<string, int> itemInventory = new Dictionary<string, int>(); // Словарь для хранения предметов
-    private InventoryUI inventoryUIManager;
-    private void Awake()
-    {
-        inventoryUIManager = FindObjectOfType<InventoryUI>(); // Находим InventoryUIManager
-    }
-    private void Start()
-    {
-        itemName = item.itemName;
-        uniqueID = Guid.NewGuid().ToString(); // Генерация уникального идентификатора
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F) && (ClickHandler.tempID == uniqueID) && (ClickHandler.distance <= 8f))
-        {
-            AddItemToInventory();
-
-            // Удаляем объект из сцены
-            Destroy(gameObject);
-        }
-    }
-
     public void AddItemToInventory()
     {
-        // Проверяем, есть ли предмет уже в инвентаре
-        if (itemInventory.ContainsKey(itemName))
+        if (inventoryWeight.AddWeight(item.itemWeight)) // добавлено для веса
         {
-            // Если предмет уже есть в словаре, увеличиваем его количество
-            itemInventory[itemName] += itemQuantity;
-        }
-        else
-        {
-            // Если предмета нет в словаре, добавляем его
-            itemInventory.Add(itemName, itemQuantity);
-        }        
+            // Проверяем, есть ли предмет уже в инвентаре
+            if (itemInventory.ContainsKey(itemName))
+            {
+                // Если предмет уже есть в словаре, увеличиваем его количество
+                itemInventory[itemName] += itemQuantity;
+            }
+            else
+            {
+                // Если предмета нет в словаре, добавляем его
+                itemInventory.Add(itemName, itemQuantity);
+            }
 
-        // Обновляем UI инвентаря
-        if (inventoryUIManager != null)
-        {
-            inventoryUIManager.UpdateUI();
+            Debug.Log($"Added item: {itemName} to inventory. Total quantity: {itemInventory[itemName]}");
+
+            // Обновляем UI инвентаря
+            if (inventoryUIManager != null)
+            {
+                inventoryUIManager.UpdateUI();
+            }
         }
     }*/
 }    

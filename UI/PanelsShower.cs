@@ -3,6 +3,7 @@ using UnityEngine;
 public class PanelsShower : MonoBehaviour
 {
     public GameObject inventoryPanel;
+
     private void Start()
     {
         inventoryPanel.SetActive(false);

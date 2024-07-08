@@ -13,6 +13,7 @@ public class CooldownScript : MonoBehaviour
     public static int currentMP, maxMP;
     public TextMeshProUGUI mpText; // Добавьте ссылку на текстовое поле
     public int manaRegenAmount = 10; // Количество восстанавливаемой маны
+    public Image mpImage;
 
     private EnemyMainInfo enemyMainInfo;
     private float manaRegenInterval = 3f; // Интервал восстановления маны в секундах
@@ -23,6 +24,7 @@ public class CooldownScript : MonoBehaviour
         player = FindObjectOfType<Player>().GetComponent<Transform>();
         maxMP = playerObject.MaxMP;
         currentMP = maxMP;
+        mpImage.fillAmount = 1;
 
         canCast = true;
     }
@@ -38,7 +40,9 @@ public class CooldownScript : MonoBehaviour
                 manaRegenTimer = 0f;
             }
         }
-        UpdateMPText(); 
+        UpdateMPText();
+
+        
 
         foreach (var slot in skillSlots)
         {
@@ -75,6 +79,7 @@ public class CooldownScript : MonoBehaviour
         if (currentMP >= skill.costMP)
         {
             currentMP -= skill.costMP;
+            
 
             enemyMainInfo = FindObjectOfType<EnemyMainInfo>();
             enemyMainInfo.TakeMagicDamage(skill.healing);
@@ -92,6 +97,7 @@ public class CooldownScript : MonoBehaviour
         if (mpText != null)
         {
             mpText.text = "MP: " + currentMP + "/" + maxMP;
+            mpImage.fillAmount = (float)currentMP / maxMP; // Обновление заполненности изображения
         }
     }
     private void RegenerateMana()

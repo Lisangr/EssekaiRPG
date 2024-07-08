@@ -7,12 +7,17 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventorySlotPrefab;
     private InventorySlot[] slots;
 
-    void Awake()
+    private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    }
+
+    private void OnEnable()
+    {
         UpdateUI();
     }
+
     public void UpdateUI()
     {
         int i = 0;
@@ -31,5 +36,5 @@ public class InventoryUI : MonoBehaviour
         {
             slots[i].ClearSlot();
         }
-    } 
+    }
 }

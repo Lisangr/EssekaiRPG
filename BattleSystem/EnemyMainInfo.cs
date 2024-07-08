@@ -7,23 +7,31 @@ public class EnemyMainInfo : MonoBehaviour
     public int maxHP;
     public Image hpImage;
     public Image healingHPImage;
-    public int experience = 10;  
-    public AudioClip[] audioClips; // Массив звуковых клипов
+    public int experience = 10;
+    public AudioClip[] audioClips;
 
     private AudioSource audioSource;
-    public int currentHP, currentHealingHP, tempHP, tempHealingHP;
-    private float maxHealingHP = 0;
+    private int currentHP, currentHealingHP;
+    private float maxHealingHP;
 
     public delegate void DeathAction(int exp);
     public static event DeathAction OnEnemyDeath;
+
+    public delegate void LootAction();
+    public static event LootAction OnEnemyDestroy;
     void Start()
     {
         currentHP = maxHP;
         currentHealingHP = 0;
-        maxHealingHP += 200;
+        maxHealingHP = 2 * maxHP;
         audioSource = GetComponent<AudioSource>();
         healingHPImage.fillAmount = 0;
         hpImage.fillAmount = 1;
+
+        // Установка параметров 3D звука
+        audioSource.spatialBlend = 1.0f; // Использование 3D звука
+        audioSource.maxDistance = 2.0f; // Установка максимальной дистанции звука на 2 метра
+
     }
 
     void Update()
@@ -31,40 +39,64 @@ public class EnemyMainInfo : MonoBehaviour
         if (currentHP <= 0 || currentHealingHP >= maxHealingHP)
         {
             int exp = experience;
-            OnEnemyDeath?.Invoke(exp); // событие для лута
+            OnEnemyDeath?.Invoke(exp);
+            OnEnemyDestroy?.Invoke();
             Destroy(this.gameObject);
-        }      
+        }
     }
+
     public void TakePhisicalDamage(int damage)
     {
-        if (currentHealingHP >= 0)
+        if (currentHealingHP > 0)
         {
-            tempHP = currentHP + currentHealingHP - damage;
-            healingHPImage.fillAmount -= currentHealingHP / maxHealingHP;
-            
-            if (healingHPImage.fillAmount <= 0)
-            { 
-                tempHealingHP = 0;
-                tempHP = currentHP - damage;
-                hpImage.fillAmount -= tempHP / maxHP;
+            int totalHP = currentHP + currentHealingHP;
+            totalHP -= damage;
+
+            if (totalHP < currentHP)
+            {
+                currentHealingHP = 0;
+                currentHP = Mathf.Max(totalHP, 0);
+            }
+            else
+            {
+                currentHealingHP = Mathf.Max(totalHP - currentHP, 0);
             }
         }
         else
         {
-            tempHP = currentHP - damage;
-            hpImage.fillAmount -= tempHP / maxHP;
+            currentHP = Mathf.Max(currentHP - damage, 0);
         }
-    }
-    public void TakeMagicDamage(int healing)
-    {
-        currentHealingHP += healing;
-        healingHPImage.fillAmount += currentHealingHP / maxHealingHP;
-        Debug.Log("Скилл использован ВЫЛЕЧЕНО   " + healing);
+
+        UpdateHealthBars();
     }
 
-    public void OnAttak() 
+    public void TakeMagicDamage(int healing)
     {
-        if (audioClips.Length > 0)
+        int missingHP = maxHP - currentHP;
+
+        if (healing > missingHP)
+        {
+            currentHP = maxHP;
+            currentHealingHP = Mathf.Min(currentHealingHP + (healing - missingHP), (int)maxHealingHP);
+        }
+        else
+        {
+            currentHP += healing;
+        }
+
+        UpdateHealthBars();
+        Debug.Log("Скилл использован ВЫЛЕЧЕНО: " + healing);
+    }
+
+    private void UpdateHealthBars()
+    {
+        hpImage.fillAmount = (float)currentHP / maxHP;
+        healingHPImage.fillAmount = (float)currentHealingHP / maxHealingHP;
+    }
+
+    public void OnAttak()
+    {
+        if (audioClips.Length > 0 && !audioSource.isPlaying)
         {
             int randomIndex = Random.Range(0, audioClips.Length);
             AudioClip randomClip = audioClips[randomIndex];
