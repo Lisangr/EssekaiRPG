@@ -70,30 +70,4 @@ public class ItemPickup : MonoBehaviour
             }
         }
     }
-    /*
-    public void AddItemToInventory()
-    {
-        if (inventoryWeight.AddWeight(item.itemWeight)) // добавлено для веса
-        {
-            // Проверяем, есть ли предмет уже в инвентаре
-            if (itemInventory.ContainsKey(itemName))
-            {
-                // Если предмет уже есть в словаре, увеличиваем его количество
-                itemInventory[itemName] += itemQuantity;
-            }
-            else
-            {
-                // Если предмета нет в словаре, добавляем его
-                itemInventory.Add(itemName, itemQuantity);
-            }
-
-            Debug.Log($"Added item: {itemName} to inventory. Total quantity: {itemInventory[itemName]}");
-
-            // Обновляем UI инвентаря
-            if (inventoryUIManager != null)
-            {
-                inventoryUIManager.UpdateUI();
-            }
-        }
-    }*/
 }    

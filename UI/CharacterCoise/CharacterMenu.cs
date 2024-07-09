@@ -11,26 +11,28 @@ public class CharacterMenu : MonoBehaviour
 
     public CharacterRegistration registrationWindow;
     public string userMale, userClass;
-    public string userID; // Add a field for userID
 
     [SerializeField] private NetComponentForCharacterChoise netComponent;
-    public void SetUserID(string id)
-    {
-        userID = id;
-    }
+    [SerializeField] private ObjectSwitcher objectSwitcher; // Ссылка на ObjectSwitcher
+
     public void Register()
     {
         string nickname = registrationWindow.nickname.text;
         UpdateCharacterInfo(nickname);
-        netComponent.Registration(nickname, userMale, userClass); // Pass userID to Registration method
+        // Используем userClass вместо nickname
+        netComponent.Registration(nickname, userMale, userClass);
     }
 
     private void UpdateCharacterInfo(string nickname)
     {
-        switch (nickname)
+        // Получаем текущий активный объект из ObjectSwitcher
+        GameObject activeObject = objectSwitcher.objects[objectSwitcher.currentIndex];
+        string activeObjectName = activeObject.name;
+
+        switch (activeObjectName)
         {
             case "Archer":
-            case "Healer":
+            case "Healler":
                 userMale = "woman";
                 break;
             default:
@@ -38,22 +40,7 @@ public class CharacterMenu : MonoBehaviour
                 break;
         }
 
-        userClass = nickname; // Assuming the nickname corresponds to the class
+        // Устанавливаем userClass на основе имени активного объекта
+        userClass = activeObjectName;
     }
-    /*
-    [System.Serializable]
-    public class CharacterRegistration
-    {
-        public TMP_Text nickname;
-    }
-
-    public CharacterRegistration registrationWindow;
-    public string userMale, userClass;
-
-    [SerializeField] private NetComponentForCharacterChoise netComponent;
-
-    public void Register()
-    {
-        netComponent.Registration(registrationWindow.nickname.text, userMale, userClass);
-    }*/
 }
