@@ -19,6 +19,9 @@ public class EnemyDetector : MonoBehaviour
     private bool playerIsOurTarget;
     private GameObject currentTree;
     private EnemyMainInfo enemyMainInfo;
+
+    public AttackDirectionIndicator attackAreaIndicator; // —сылка на индикатор области атаки
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -41,15 +44,18 @@ public class EnemyDetector : MonoBehaviour
                 navMeshAgent.isStopped = true;
                 animator.SetTrigger("Attack");
                 enemyMainInfo.OnAttak();
+                ShowAttackIndicator();
             }
             else
             {
                 navMeshAgent.isStopped = false;
+                HideAttackIndicator();
             }
         }
         else
         {
             FindAndChopTree();
+            HideAttackIndicator();
         }
 
         if (navMeshAgent.velocity.magnitude > 0.1f)
@@ -61,11 +67,17 @@ public class EnemyDetector : MonoBehaviour
             animator.SetTrigger("Idle");
         }
 
-        if (currentTree != null && Vector3.Distance(transform.position, 
+        if (currentTree != null && Vector3.Distance(transform.position,
             currentTree.transform.position) <= chopDistance)
         {
             animator.SetTrigger("Attack");
             enemyMainInfo.OnAttak();
+            ShowAttackIndicator();
+        }
+
+        if (attackAreaIndicator != null)
+        {
+            attackAreaIndicator.UpdateAttackIndicator();
         }
     }
 
@@ -147,6 +159,22 @@ public class EnemyDetector : MonoBehaviour
         {
             currentTree = closestTree;
             navMeshAgent.SetDestination(closestTree.transform.position);
+        }
+    }
+
+    void ShowAttackIndicator()
+    {
+        if (attackAreaIndicator != null)
+        {
+            attackAreaIndicator.ShowIndicator();
+        }
+    }
+
+    void HideAttackIndicator()
+    {
+        if (attackAreaIndicator != null)
+        {
+            attackAreaIndicator.HideIndicator();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -21,15 +22,15 @@ public class Menu : MonoBehaviour
     public MenuRegistration registrationWindow;
     public string userMale, userClass;
 
-    [SerializeField] private Test test;
+    [SerializeField] private NetComponent netComponent;
 
     public void Login()
     {
-        test.Login(loginWindow.login.text, loginWindow.password.text);
+        netComponent.Login(loginWindow.login.text, loginWindow.password.text);
     }
     public void Register()
     {
-        test.Registration(registrationWindow.login.text, registrationWindow.password1.text,
+        netComponent.Registration(registrationWindow.login.text, registrationWindow.password1.text,
              registrationWindow.password2.text, registrationWindow.nickname.text,
              userMale, userClass);
     }

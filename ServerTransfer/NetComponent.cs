@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class UserData
 {
     public PlayerInfo playerInfo;
     public Error error;
+    public string userID;
 }
 
 [System.Serializable]
@@ -35,18 +38,22 @@ public class PlayerInfo
     public void SetUserName(string _nick) => nickname = _nick;
 }
 
-public class Test : MonoBehaviour
+public class NetComponent : MonoBehaviour
 {
     public UserData userData = new UserData();
+    public string userID; // Add field to store userID
     [SerializeField] private string targetUrl = "http://localhost/rpg/logreg.php";
-    //[SerializeField] UserData returnedData;
+    [SerializeField] private string sceneName;
+    [SerializeField] private GameObject errorForm;
+
     public string GetUserData(UserData data)
     {
         return JsonUtility.ToJson(data);
     }
+
     public UserData SetUserData(string data)
     {
-        Debug.Log("Raw JSON: " + data); // Добавлено для отладки
+        Debug.Log("Raw JSON: " + data); // Added for debugging
         return JsonUtility.FromJson<UserData>(data);
     }
 
@@ -62,15 +69,6 @@ public class Test : MonoBehaviour
         Logining(login, password);
     }
 
-    public void Logining(string login, string password)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("type", "logining");
-        form.AddField("login", login);
-        form.AddField("password", password);
-
-        StartCoroutine(SendData(form));
-    }
     public void Registration(string login, string password1, string password2, string nickname, string userMale, string userClass)
     {
         StopAllCoroutines();
@@ -84,13 +82,24 @@ public class Test : MonoBehaviour
         form.AddField("login", login);
         form.AddField("password1", password1);
         form.AddField("password2", password2);
-        form.AddField("nickname", nickname); // Добавлено поле nickname
-        form.AddField("userMale", userMale); // Добавлено поле userMale
-        form.AddField("userClass", userClass); // Добавлено поле userClass
+        form.AddField("nickname", nickname); // Add field nickname
+        form.AddField("userMale", userMale); // Add field userMale
+        form.AddField("userClass", userClass); // Add field userClass
 
         StartCoroutine(SendData(form));
     }
-    private IEnumerator SendData(WWWForm form)
+
+    public void Logining(string login, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("type", "logining");
+        form.AddField("login", login);
+        form.AddField("password", password);
+
+        StartCoroutine(SendData(form, OnLoginResponse));
+    }
+
+    private IEnumerator SendData(WWWForm form, Action<string> callback)
     {
         using (UnityWebRequest www = UnityWebRequest.Post(targetUrl, form))
         {
@@ -103,7 +112,47 @@ public class Test : MonoBehaviour
             else
             {
                 string responseText = www.downloadHandler.text;
-                Debug.Log("Response: " + responseText); // Отладка ответа сервера
+                Debug.Log("Response: " + responseText); // Debug server response
+                callback?.Invoke(responseText);
+            }
+        }
+    }
+
+    private void OnLoginResponse(string jsonResponse)
+    {
+        UserData response = SetUserData(jsonResponse);
+
+        if (response.error.isErrored)
+        {
+            errorForm.SetActive(true);
+            Debug.LogError("Login failed: " + response.error.errorText);
+            // Handle error (e.g., display message to user)
+        }
+        else
+        {
+            Debug.Log("Login successful. Welcome, " + response.playerInfo.nickname);
+            userID = response.userID; // Store the userID
+            PlayerPrefs.SetString("userID", userID); // Save userID to PlayerPrefs
+            PlayerPrefs.Save(); // Ensure the data is written to disk
+                                // Load the scene after successful login
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        }
+    }
+
+        private IEnumerator SendData(WWWForm form)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Post(targetUrl, form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error: " + www.error);
+            }
+            else
+            {
+                string responseText = www.downloadHandler.text;
+                Debug.Log("Response: " + responseText); // Debug server response
                 userData = SetUserData(responseText);
             }
         }
