@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectSwitcher : MonoBehaviour
 {
     public GameObject[] objects;
-    private int currentIndex = 0; // Сделаем currentIndex публичным
+    public int currentIndex = 0; // Сделаем currentIndex публичным
 
     private void Start()
     {

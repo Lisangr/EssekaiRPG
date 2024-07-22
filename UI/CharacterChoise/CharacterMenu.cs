@@ -1,5 +1,7 @@
 using TMPro;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterMenu : MonoBehaviour
 {
@@ -8,19 +10,22 @@ public class CharacterMenu : MonoBehaviour
     {
         public TMP_Text nickname;
     }
-
-    public CharacterRegistration registrationWindow;
-    public string userMale, userClass;
-
+    
+    [SerializeField] private string sceneName = "Summon 1";
     [SerializeField] private NetComponentForCharacterChoise netComponent;
     [SerializeField] private ObjectSwitcher objectSwitcher; // —сылка на ObjectSwitcher
 
+    public CharacterRegistration registrationWindow;
+
+    private string userMale, userClass;
     public void Register()
     {
         string nickname = registrationWindow.nickname.text;
         UpdateCharacterInfo(nickname);
         // »спользуем userClass вместо nickname
         netComponent.Registration(nickname, userMale, userClass);
+
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     private void UpdateCharacterInfo(string nickname)

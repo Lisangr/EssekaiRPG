@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private int jumpsRemaining;
     private Transform player;
     private Animator animator;
-    private bool grounded;
+    private bool isGrounded;
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Jump();
+        OverJump();
         /*
          if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
          {
@@ -50,11 +51,23 @@ public class Player : MonoBehaviour
         Vector3 moveDirection = (transform.forward * vInput + transform.right * hInput) * Time.fixedDeltaTime;
         rb.MovePosition(this.transform.position + moveDirection);
 
-        if (grounded && (vInput != 0 || hInput != 0))
+        if (isGrounded && (hInput > 0))
+        {
+            animator.SetTrigger("Right");
+        }
+        else if (isGrounded && (hInput < 0))
+        {
+            animator.SetTrigger("Left");
+        }
+        else if (isGrounded && (vInput > 0))
         {
             animator.SetTrigger("Go");
         }
-        else if (grounded)
+        else if (isGrounded && (vInput < 0))
+        {
+            animator.SetTrigger("Back");
+        }
+        else
         {
             animator.SetTrigger("Idle");
         }
@@ -94,16 +107,36 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             jumpsRemaining--;
-            grounded = false;
-            animator.SetTrigger("Jump");
+            isGrounded = false;
+            animator.SetTrigger("Jump");           
         }
     }
+    void OverJump()
+    {
+        float vInput = Input.GetAxis("Vertical");
 
+        if (vInput > 0)
+        {
+            if (Input.GetButtonDown("Jump") && jumpsRemaining > 0)
+            {
+                isGrounded = false;
+                animator.SetTrigger("OverJump");
+            }
+        }
+        else if (vInput < 0)
+        {
+            if (Input.GetButtonDown("Jump") && jumpsRemaining > 0)
+            {
+                isGrounded = false;
+                animator.SetTrigger("BackJump");
+            }
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            grounded = true;
+            isGrounded = true;
             //SavePlayerPosition();
         }
     }

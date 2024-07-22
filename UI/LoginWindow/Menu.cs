@@ -15,12 +15,11 @@ public class Menu : MonoBehaviour
     [System.Serializable]
     public class MenuRegistration
     {
-        public TMP_Text login, password1, password2, nickname;        
+        public TMP_Text login, password1, password2;        
     }
 
     public MenuLogin loginWindow;
     public MenuRegistration registrationWindow;
-    public string userMale, userClass;
 
     [SerializeField] private NetComponent netComponent;
 
@@ -31,7 +30,6 @@ public class Menu : MonoBehaviour
     public void Register()
     {
         netComponent.Registration(registrationWindow.login.text, registrationWindow.password1.text,
-             registrationWindow.password2.text, registrationWindow.nickname.text,
-             userMale, userClass);
+             registrationWindow.password2.text);
     }
 }

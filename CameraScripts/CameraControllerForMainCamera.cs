@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using YG;
 
@@ -33,7 +34,11 @@ public class CameraControllerForMainCamera : MonoBehaviour
     }
     void LateUpdate()
     {
-        RotateWithMouse();
+        if (Input.GetMouseButton(1)) 
+            RotateWithMouse();
+
+        if (Input.GetMouseButton(0))
+            RotateCamera();
         /*
         if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
         {
@@ -50,24 +55,44 @@ public class CameraControllerForMainCamera : MonoBehaviour
     {
         if (player)
         {
-            if (Input.GetMouseButton(1)) // Проверка нажатия правой кнопки мыши
-            {
-                x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-                y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            // Обновление углов поворота камеры и игрока
+            x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+            y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
-                y = ClampAngle(y, yMinLimit, yMaxLimit);
-            }
+            y = ClampAngle(y, yMinLimit, yMaxLimit);
 
+            // Обновление направления взгляда игрока
+            player.rotation = Quaternion.Euler(0, x, 0);
+
+            // Вращение и позиция камеры
             Quaternion rotation = Quaternion.Euler(y, x, 0);
             Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + player.position;
 
             transform.rotation = rotation;
             transform.position = position;
-
-            // Обновление направления взгляда игрока
-            player.rotation = Quaternion.Euler(0, x, 0);
         }
-    }/*
+    }
+
+    void RotateCamera()
+    {
+        if (player)
+        {
+            // Обновление углов поворота камеры
+            x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+            y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+
+            y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+            // Вращение и позиция камеры
+            Quaternion rotation = Quaternion.Euler(y, x, 0);
+            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + player.position;
+
+            transform.rotation = rotation;
+            transform.position = position;
+        }
+    }
+   
+    /*
     void RotateWithJoystick()
     {
         if (player)

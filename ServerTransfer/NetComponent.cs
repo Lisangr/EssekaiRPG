@@ -23,19 +23,9 @@ public class Error
 [System.Serializable]
 public class PlayerInfo
 {
-    public string userMale;
-    public string userClass;
-    public string nickname;
-    public PlayerInfo(string male, string clas, string nick)
+    public PlayerInfo()
     {
-        userMale = male;
-        userClass = clas;
-        nickname = nick;
     }
-
-    public void SetUserMale(string _male) => userMale = _male;
-    public void SetUserClass(string _clas) => userClass = _clas;
-    public void SetUserName(string _nick) => nickname = _nick;
 }
 
 public class NetComponent : MonoBehaviour
@@ -60,7 +50,7 @@ public class NetComponent : MonoBehaviour
     private void Start()
     {
         userData.error = new Error() { errorText = "text", isErrored = true };
-        userData.playerInfo = new PlayerInfo("man", "healer", "Lisangr");
+        userData.playerInfo = new PlayerInfo();
     }
 
     public void Login(string login, string password)
@@ -69,22 +59,19 @@ public class NetComponent : MonoBehaviour
         Logining(login, password);
     }
 
-    public void Registration(string login, string password1, string password2, string nickname, string userMale, string userClass)
+    public void Registration(string login, string password1, string password2)
     {
         StopAllCoroutines();
-        Registering(login, password1, password2, nickname, userMale, userClass);
+        Registering(login, password1, password2);
     }
 
-    public void Registering(string login, string password1, string password2, string nickname, string userMale, string userClass)
+    public void Registering(string login, string password1, string password2)
     {
         WWWForm form = new WWWForm();
         form.AddField("type", "register");
         form.AddField("login", login);
         form.AddField("password1", password1);
         form.AddField("password2", password2);
-        form.AddField("nickname", nickname); // Add field nickname
-        form.AddField("userMale", userMale); // Add field userMale
-        form.AddField("userClass", userClass); // Add field userClass
 
         StartCoroutine(SendData(form));
     }
@@ -130,7 +117,7 @@ public class NetComponent : MonoBehaviour
         }
         else
         {
-            Debug.Log("Login successful. Welcome, " + response.playerInfo.nickname);
+            Debug.Log("Login successful.");
             userID = response.userID; // Store the userID
             PlayerPrefs.SetString("userID", userID); // Save userID to PlayerPrefs
             PlayerPrefs.Save(); // Ensure the data is written to disk
@@ -139,7 +126,7 @@ public class NetComponent : MonoBehaviour
         }
     }
 
-        private IEnumerator SendData(WWWForm form)
+    private IEnumerator SendData(WWWForm form)
     {
         using (UnityWebRequest www = UnityWebRequest.Post(targetUrl, form))
         {
