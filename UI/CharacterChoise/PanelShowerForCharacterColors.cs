@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class PanelShowerForCharacterColors : MonoBehaviour
 {
     public GameObject skinPanel;
@@ -22,7 +21,8 @@ public class PanelShowerForCharacterColors : MonoBehaviour
 
     void Start()
     {
-        SetPanelsActive(false);
+    currentPanel.SetActive(true);
+    SetPanelsActive(false);
     }
     private void Update()
     {
@@ -80,5 +80,5 @@ public class PanelShowerForCharacterColors : MonoBehaviour
     {
         currentPanel.SetActive(true);
         nextPanel.SetActive(false);
-    }
+    }    
 }

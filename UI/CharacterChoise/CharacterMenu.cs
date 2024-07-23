@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +10,7 @@ public class CharacterMenu : MonoBehaviour
         public TMP_Text nickname;
     }
     
-    [SerializeField] private string sceneName = "Summon 1";
+    [SerializeField] private string sceneName = "CharacterCustomization";
     [SerializeField] private NetComponentForCharacterChoise netComponent;
     [SerializeField] private ObjectSwitcher objectSwitcher; // —сылка на ObjectSwitcher
 

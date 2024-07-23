@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class CharacterData
@@ -22,16 +19,18 @@ public class CharacterError
 [System.Serializable]
 public class CharacterInfo
 {
+    public string id; // New field for ID
     public string userMale;
     public string userClass;
     public string nickname;
-    public CharacterInfo(string male, string clas, string nick)
+    public CharacterInfo(string _id, string male, string clas, string nick)
     {
+        id = _id;
         userMale = male;
         userClass = clas;
         nickname = nick;
     }
-
+    public void SetID(string _id) => id = _id;
     public void SetUserMale(string _male) => userMale = _male;
     public void SetUserClass(string _clas) => userClass = _clas;
     public void SetUserName(string _nick) => nickname = _nick;
@@ -49,13 +48,27 @@ public class NetComponentForCharacterChoise : MonoBehaviour
     public CharacterData SetCharacterData(string data)
     {
         Debug.Log("Raw JSON: " + data); // Added for debugging
-        return JsonUtility.FromJson<CharacterData>(data);
+        CharacterData characterData = JsonUtility.FromJson<CharacterData>(data);
+
+        if (characterData != null && characterData.characterInfo != null)
+        {
+            string Id = characterData.characterInfo.id;
+            if (!string.IsNullOrEmpty(Id))
+            {
+                PlayerPrefs.SetString("ID", Id); // Save ID to PlayerPrefs
+                PlayerPrefs.Save();
+
+                Debug.LogError("ID was set in PlayerPrefs." + Id);
+            }
+        }
+
+        return characterData;
     }
 
     private void Start()
     {
         characterData.error = new Error() { errorText = "text", isErrored = true };
-        characterData.characterInfo = new CharacterInfo("man", "healer", "Lisangr");
+        characterData.characterInfo = new CharacterInfo("","man", "healer", "Lisangr");
     }
 
     public void Registration(string nickname, string userMale, string userClass)
