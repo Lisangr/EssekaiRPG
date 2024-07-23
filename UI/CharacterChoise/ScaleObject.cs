@@ -14,7 +14,7 @@ public class ScaleObject : MonoBehaviour
     private float defaultScale = 30f;
 
     void Start()
-    {
+    {        
         // Установка начального масштаба объекта
         transform.localScale = new Vector3(defaultScale, defaultScale, defaultScale);
 
@@ -32,6 +32,7 @@ public class ScaleObject : MonoBehaviour
     // Метод для изменения масштаба по оси X
     public void ChangeScaleX(float value)
     {
+        RotateCharacterForCustomizationMenu.isDragging = false;
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Lerp(minScale, maxScale, value);
         transform.localScale = scale;
@@ -40,6 +41,7 @@ public class ScaleObject : MonoBehaviour
     // Метод для изменения масштаба по оси Y
     public void ChangeScaleY(float value)
     {
+        RotateCharacterForCustomizationMenu.isDragging = false;
         Vector3 scale = transform.localScale;
         scale.y = Mathf.Lerp(minScale, maxScale, value);
         transform.localScale = scale;
@@ -48,6 +50,7 @@ public class ScaleObject : MonoBehaviour
     // Метод для изменения масштаба по оси Z
     public void ChangeScaleZ(float value)
     {
+        RotateCharacterForCustomizationMenu.isDragging = false;
         Vector3 scale = transform.localScale;
         scale.z = Mathf.Lerp(minScale, maxScale, value);
         transform.localScale = scale;

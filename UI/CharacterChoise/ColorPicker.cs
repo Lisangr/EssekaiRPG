@@ -76,7 +76,7 @@ public class ColorPicker : MonoBehaviour
     void Start()
     {
         InitializeSliders();
-        UpdateColors();
+        AddSliderListeners();
     }
 
     void Update()
@@ -130,7 +130,57 @@ public class ColorPicker : MonoBehaviour
         MetalDarkSliderG.value = 0.2f;
         MetalDarkSliderB.value = 0.2f;
     }
+    private void AddSliderListeners()
+    {
+        HairSliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        HairSliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        HairSliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
 
+        SkinSliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        SkinSliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        SkinSliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        BodyArtSliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        BodyArtSliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        BodyArtSliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        EyesSliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        EyesSliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        EyesSliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        PrimarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        PrimarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        PrimarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        SecondarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        SecondarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        SecondarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        LeatherPrimarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        LeatherPrimarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        LeatherPrimarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        MetalPrimarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalPrimarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalPrimarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        LeatherSecondarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        LeatherSecondarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        LeatherSecondarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        MetalSecondarySliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalSecondarySliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalSecondarySliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+
+        MetalDarkSliderR.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalDarkSliderG.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+        MetalDarkSliderB.onValueChanged.AddListener(delegate { OnSliderChanged(); });
+    }
+
+    private void OnSliderChanged()
+    {
+        RotateCharacterForCustomizationMenu.isDragging = false;
+    }
     public void UpdateColors()
     {
         colorHair = new Color(HairSliderR.value, HairSliderG.value, HairSliderB.value);

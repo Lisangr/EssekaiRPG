@@ -12,6 +12,7 @@ public class RaceAndGender : MonoBehaviour
     public GameObject humanMale;
     public GameObject humanFemale;
 
+    public static bool isFemale;
     private void Awake()
     {
         // Cache and deactivate all characters first
@@ -23,6 +24,8 @@ public class RaceAndGender : MonoBehaviour
 
         // Activate the default character
         UpdateActiveCharacter();
+
+        isFemale = false;
     }
     private void CacheAndDeactivateCharacters()
     {
@@ -48,6 +51,7 @@ public class RaceAndGender : MonoBehaviour
     public void SelectMale()
     {
         selectedGender = Genders.Male;
+        isFemale = false;
         Debug.Log("Gender selected: Male");
         UpdateActiveCharacter();
     }
@@ -55,6 +59,7 @@ public class RaceAndGender : MonoBehaviour
     public void SelectFemale()
     {
         selectedGender = Genders.Female;
+        isFemale = true;
         Debug.Log("Gender selected: Female");
         UpdateActiveCharacter();
     }
