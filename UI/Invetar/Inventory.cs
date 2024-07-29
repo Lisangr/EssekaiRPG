@@ -4,15 +4,18 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public int space = 10;
-    public List<Item> allItems; // Список всех возможных предметов
+    public List<Item> allItems;
     private InventoryUI inventoryUIManager;
-    private InventoryWeight inventoryWeight;
+    public InventoryWeight inventoryWeight;
+    public static Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
+
     private void Awake()
     {
         inventoryUIManager = FindObjectOfType<InventoryUI>();
-        inventoryWeight = FindObjectOfType<InventoryWeight>(); // Находим InventoryWeight// Находим InventoryUIManager
+        inventoryWeight = FindObjectOfType<InventoryWeight>();
         InitializeInventory();
     }
+
     private void InitializeInventory()
     {
         foreach (Item item in allItems)
@@ -74,5 +77,17 @@ public class Inventory : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void AddToAmmoInventory(string itemName, int quantity)
+    {
+        if (ammoInventory.ContainsKey(itemName))
+        {
+            ammoInventory[itemName] += quantity;
+        }
+        else
+        {
+            ammoInventory.Add(itemName, quantity);
+        }
     }
 }

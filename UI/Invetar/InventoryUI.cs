@@ -6,11 +6,13 @@ public class InventoryUI : MonoBehaviour
     public Inventory inventory;
     public GameObject inventorySlotPrefab;
     private InventorySlot[] slots;
+    private AmmoSlot[] ammoSlots;
 
     private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        ammoSlots = FindObjectsOfType<AmmoSlot>();
     }
 
     private void OnEnable()
@@ -25,16 +27,33 @@ public class InventoryUI : MonoBehaviour
         {
             if (i < slots.Length)
             {
-                slots[i].index = i; // Установка индекса слота
+                slots[i].index = i;
                 slots[i].AddItem(item.Key, item.Value);
                 i++;
             }
         }
 
-        // Очищаем оставшиеся слоты
         for (; i < slots.Length; i++)
         {
             slots[i].ClearSlot();
+        }
+
+        // Update ammo slots
+        foreach (var ammoSlot in ammoSlots)
+        {
+            ammoSlot.ClearSlot();
+        }
+
+        foreach (var item in Inventory.ammoInventory)
+        {
+            foreach (var ammoSlot in ammoSlots)
+            {
+                if (ammoSlot.itemName == null)
+                {
+                    ammoSlot.AddItem(item.Key, item.Value);
+                    break;
+                }
+            }
         }
     }
 }
