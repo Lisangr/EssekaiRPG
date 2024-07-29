@@ -174,6 +174,28 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             Destroy(draggingIcon);
         }
 
+        if (isOutsideInventory && !TraderPanel.tradePossible)
+        {
+            transform.position = originalPosition;
+            transform.SetParent(originalParent);
+            itemQuantity -= 1;
+            CreateDroppedItem();
+            ClearSlot();
+            inventoryUI.UpdateUI();
+        }
+
+        if (isOutsideInventory && TraderPanel.tradePossible)
+        {
+            transform.position = originalPosition;
+            transform.SetParent(originalParent);
+            itemQuantity -= 1;
+            Debug.Log("Предмет ПРОДАН C ПОМОЩЬЮ DRAG & DROP");
+
+            TradingItems();
+            ClearSlot();
+            inventoryUI.UpdateUI();
+        }
+
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = Input.mousePosition;
         List<RaycastResult> results = new List<RaycastResult>();
