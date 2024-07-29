@@ -37,8 +37,8 @@ public class CameraControllerForMainCamera : MonoBehaviour
         if (Input.GetMouseButton(1)) 
             RotateWithMouse();
 
-        if (Input.GetMouseButton(0))
-            RotateCamera();
+       // if (Input.GetMouseButton(0))
+            //RotateCamera();
         /*
         if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
         {
@@ -72,7 +72,7 @@ public class CameraControllerForMainCamera : MonoBehaviour
             transform.position = position;
         }
     }
-
+    /*
     void RotateCamera()
     {
         if (player)
@@ -91,7 +91,7 @@ public class CameraControllerForMainCamera : MonoBehaviour
             transform.position = position;
         }
     }
-   
+   */
     /*
     void RotateWithJoystick()
     {

@@ -11,6 +11,9 @@ public class FacialHairGroupHandler : MonoBehaviour
     private List<List<GameObject>> facialHairGroups; // Список списков объектов
     private int[] currentIndexes; // Массив текущих индексов для каждого списка
 
+    public string serverUrl;
+    public string sceneName;
+
     void Start()
     {
         facialHairGroups = new List<List<GameObject>>();
@@ -81,6 +84,7 @@ public class FacialHairGroupHandler : MonoBehaviour
         if (currentIndexes[groupIndex] > 0)
         {
             ActivateObject(groupIndex, currentIndexes[groupIndex] - 1);
+            SaveCurrentActiveElement(groupIndex);
         }
     }
 
@@ -89,6 +93,7 @@ public class FacialHairGroupHandler : MonoBehaviour
         if (currentIndexes[groupIndex] < facialHairGroups[groupIndex].Count - 1)
         {
             ActivateObject(groupIndex, currentIndexes[groupIndex] + 1);
+            SaveCurrentActiveElement(groupIndex);
         }
     }
 
@@ -101,5 +106,39 @@ public class FacialHairGroupHandler : MonoBehaviour
 
         facialHairGroups[groupIndex][newIndex].SetActive(true);
         currentIndexes[groupIndex] = newIndex;
+    }
+
+    private void SaveCurrentActiveElement(int groupIndex)
+    {
+        string activeElementName = facialHairGroups[groupIndex][currentIndexes[groupIndex]].name;
+        PlayerPrefs.SetString(namesForSearch[groupIndex], activeElementName);
+        PlayerPrefs.Save();
+        Debug.Log($"Saved active element '{activeElementName}' for group '{namesForSearch[groupIndex]}'");
+    }
+
+
+    private void DisplaySavedElements()
+    {
+        Debug.Log("Saved elements:");
+        foreach (string key in namesForSearch)
+        {
+            string value = PlayerPrefs.GetString(key, "not found");
+            Debug.Log($"{key}: {value}");
+        }
+    }
+    public void AddSavedElementsToForm(WWWForm form)
+    {
+        foreach (string key in namesForSearch)
+        {
+            if (PlayerPrefs.HasKey(key))
+            {
+                string value = PlayerPrefs.GetString(key);
+                form.AddField(key, value);
+            }
+            else
+            {
+                Debug.LogWarning($"PlayerPrefs does not contain key: {key}");
+            }
+        }
     }
 }

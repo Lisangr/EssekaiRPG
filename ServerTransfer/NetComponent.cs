@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -23,17 +22,19 @@ public class Error
 [System.Serializable]
 public class PlayerInfo
 {
-    public PlayerInfo()
-    {
-    }
+    public bool hasCharacters;
+    public string nickname;
+    public string userMale;
+    public string userClass;
 }
 
 public class NetComponent : MonoBehaviour
 {
     public UserData userData = new UserData();
-    public string userID; // Add field to store userID
+    public string userID;
     [SerializeField] private string targetUrl = "http://localhost/rpg/logreg.php";
     [SerializeField] private string sceneName;
+    [SerializeField] private string lobbySceneName;
     [SerializeField] private GameObject errorForm;
 
     public string GetUserData(UserData data)
@@ -43,7 +44,7 @@ public class NetComponent : MonoBehaviour
 
     public UserData SetUserData(string data)
     {
-        Debug.Log("Raw JSON: " + data); // Added for debugging
+        Debug.Log("Raw JSON: " + data);
         return JsonUtility.FromJson<UserData>(data);
     }
 
@@ -99,7 +100,7 @@ public class NetComponent : MonoBehaviour
             else
             {
                 string responseText = www.downloadHandler.text;
-                Debug.Log("Response: " + responseText); // Debug server response
+                Debug.Log("Response: " + responseText);
                 callback?.Invoke(responseText);
             }
         }
@@ -113,16 +114,32 @@ public class NetComponent : MonoBehaviour
         {
             errorForm.SetActive(true);
             Debug.LogError("Login failed: " + response.error.errorText);
-            // Handle error (e.g., display message to user)
         }
         else
         {
             Debug.Log("Login successful.");
-            userID = response.userID; // Store the userID
-            PlayerPrefs.SetString("userID", userID); // Save userID to PlayerPrefs
-            PlayerPrefs.Save(); // Ensure the data is written to disk
-                                // Load the scene after successful login
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            userID = response.userID;
+            PlayerPrefs.SetString("userID", userID);
+            PlayerPrefs.Save();
+
+            Debug.Log("Player has characters: " + response.playerInfo.hasCharacters);
+            Debug.Log("Player nickname: " + response.playerInfo.nickname);
+            Debug.Log("Player userMale: " + response.playerInfo.userMale);
+            Debug.Log("Player userClass: " + response.playerInfo.userClass);
+
+            if (response.playerInfo.hasCharacters &&
+                !string.IsNullOrEmpty(response.playerInfo.nickname) &&
+                !string.IsNullOrEmpty(response.playerInfo.userMale) &&
+                !string.IsNullOrEmpty(response.playerInfo.userClass))
+            {
+                Debug.Log("Loading lobby scene...");
+                SceneManager.LoadScene(lobbySceneName, LoadSceneMode.Single);
+            }
+            else
+            {
+                Debug.Log("Loading main scene...");
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            }
         }
     }
 
@@ -139,7 +156,7 @@ public class NetComponent : MonoBehaviour
             else
             {
                 string responseText = www.downloadHandler.text;
-                Debug.Log("Response: " + responseText); // Debug server response
+                Debug.Log("Response: " + responseText);
                 userData = SetUserData(responseText);
             }
         }

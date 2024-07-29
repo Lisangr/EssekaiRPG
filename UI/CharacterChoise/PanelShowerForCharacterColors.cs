@@ -14,7 +14,6 @@ public class PanelShowerForCharacterColors : MonoBehaviour
     public GameObject secondaryColorPanel;
     public GameObject darkMetalColorPanel;
     public GameObject primaryColorPanel;
-    public GameObject notForFemalePole;
     public GameObject secondCharacterPanel;
 
     private GameObject panel;
@@ -23,18 +22,7 @@ public class PanelShowerForCharacterColors : MonoBehaviour
     {
     currentPanel.SetActive(true);
     SetPanelsActive(false);
-    }
-    private void Update()
-    {
-        if (RaceAndGender.isFemale)
-        {
-            notForFemalePole.SetActive(false);
-        }
-        else
-        {
-            notForFemalePole.SetActive(true);
-        }
-    }
+    }    
     private void SetPanelsActive(bool state)
     {
         skinPanel.SetActive(state);

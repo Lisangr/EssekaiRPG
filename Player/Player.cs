@@ -1,14 +1,11 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using YG;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeedH = 3f;
+    public float moveSpeedV = 5f;
     public float jumpForce = 5f;
     public int maxJumps = 2;
-    //public Joystick movingJoystick;
     public int MaxMP = 100;
 
     private Rigidbody rb;
@@ -16,13 +13,24 @@ public class Player : MonoBehaviour
     private Transform player;
     private Animator animator;
     private bool isGrounded;
+
+    public CharacterLoader characterLoader;
     public void Start()
     {
+        characterLoader = FindObjectOfType<CharacterLoader>();
+        if (characterLoader != null)
+        {
+            characterLoader.LoadCustomisation(gameObject);
+        }
+        else
+        {
+            Debug.LogError("CharacterLoader не найден!");
+        }
+
         rb = GetComponent<Rigidbody>();
         jumpsRemaining = maxJumps;
         player = GetComponent<Transform>();
         animator = GetComponent<Animator>();
-        //StartCoroutine(LoadPlayerPosition());
     }
 
     void Update()
@@ -30,23 +38,11 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         OverJump();
-        /*
-         if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
-         {
-             MoveWithJoistick();
-         }
-         else
-         {
-             Move();
-             Jump();
-         }
-     }
-        */
     }
     void Move()
     {
-        float vInput = Input.GetAxis("Vertical") * moveSpeed;
-        float hInput = Input.GetAxis("Horizontal") * moveSpeed;
+        float vInput = Input.GetAxis("Vertical") * moveSpeedV;
+        float hInput = Input.GetAxis("Horizontal") * moveSpeedH;
 
         Vector3 moveDirection = (transform.forward * vInput + transform.right * hInput) * Time.fixedDeltaTime;
         rb.MovePosition(this.transform.position + moveDirection);
@@ -137,7 +133,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            //SavePlayerPosition();
         }
     }
     public void OnCollisionEnter(Collision collision)
@@ -149,27 +144,6 @@ public class Player : MonoBehaviour
                 animator.SetTrigger("Go");
             }
             jumpsRemaining = maxJumps;
-            //SavePlayerPosition();
         }
     }
-
-    private void SavePlayerPosition()
-    {
-        Vector3 position = player.transform.position;
-        PlayerPrefs.SetFloat("PlayerX", position.x);
-        PlayerPrefs.SetFloat("PlayerY", position.y);
-        PlayerPrefs.SetFloat("PlayerZ", position.z);
-        PlayerPrefs.Save();
-    }
-    private IEnumerator LoadPlayerPosition()
-    {
-        float x = PlayerPrefs.GetFloat("PlayerX");
-        float y = PlayerPrefs.GetFloat("PlayerY");
-        float z = PlayerPrefs.GetFloat("PlayerZ");
-        player.transform.position = new Vector3(x, y, z);
-
-        yield return null;
-
-    }
-
 }

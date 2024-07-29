@@ -9,7 +9,7 @@ public class CharacterMenu : MonoBehaviour
     {
         public TMP_Text nickname;
     }
-    
+
     [SerializeField] private string sceneName = "CharacterCustomization";
     [SerializeField] private NetComponentForCharacterChoise netComponent;
     [SerializeField] private ObjectSwitcher objectSwitcher; // Ссылка на ObjectSwitcher
@@ -33,17 +33,15 @@ public class CharacterMenu : MonoBehaviour
         GameObject activeObject = objectSwitcher.objects[objectSwitcher.currentIndex];
         string activeObjectName = activeObject.name;
 
-        switch (activeObjectName)
+        int t = objectSwitcher.currentIndex;
+        if (t == 1 || t == 3)
         {
-            case "Archer":
-            case "Healler":
-                userMale = "woman";
-                break;
-            default:
-                userMale = "man";
-                break;
+            userMale = "Woman";
         }
-
+        else
+        {
+            userMale = "man";
+        }
         // Устанавливаем userClass на основе имени активного объекта
         userClass = activeObjectName;
     }

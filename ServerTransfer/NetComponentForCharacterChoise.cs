@@ -64,12 +64,12 @@ public class NetComponentForCharacterChoise : MonoBehaviour
 
         return characterData;
     }
-
+    /*
     private void Start()
     {
         characterData.error = new Error() { errorText = "text", isErrored = true };
         characterData.characterInfo = new CharacterInfo("","man", "healer", "Lisangr");
-    }
+    }*/
 
     public void Registration(string nickname, string userMale, string userClass)
     {

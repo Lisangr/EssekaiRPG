@@ -19,7 +19,6 @@ public class ScaleObject : MonoBehaviour
     private float defaultScale = 30f;
 
     private ColorPicker colorPicker;
-    private RaceAndGender raceAndGender;
     private FacialHairGroupHandler facialHairGroupHandler;
     Vector3 scale;
     void Start()
@@ -67,17 +66,11 @@ public class ScaleObject : MonoBehaviour
     private IEnumerator SendScaleData()
     {
         colorPicker = FindObjectOfType<ColorPicker>().GetComponent<ColorPicker>();
-        raceAndGender = FindObjectOfType<RaceAndGender>().GetComponent<RaceAndGender>();
+        facialHairGroupHandler = FindObjectOfType<FacialHairGroupHandler>().GetComponent<FacialHairGroupHandler>();
 
         if (colorPicker == null)
         {
             Debug.LogError("ColorPicker component not found in the scene.");
-            yield break;
-        }
-
-        if (raceAndGender == null)
-        {
-            Debug.LogError("RaceAndGender component not found in the scene.");
             yield break;
         }
 
@@ -144,8 +137,8 @@ public class ScaleObject : MonoBehaviour
         form.AddField("MetalDarkSliderG", colorPicker.MetalDarkSliderG.value.ToString().Replace(',', '.'));
         form.AddField("MetalDarkSliderB", colorPicker.MetalDarkSliderB.value.ToString().Replace(',', '.'));
 
-        // Add race field
-        form.AddField("Race", raceAndGender.selectedRace.ToString());
+        // Add saved elements
+        facialHairGroupHandler.AddSavedElementsToForm(form);
 
         using (UnityWebRequest www = UnityWebRequest.Post(serverUrl, form))
         {
