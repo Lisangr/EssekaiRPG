@@ -3,11 +3,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class AmmoSlot : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Image icon;
     public string itemName;
     public int itemQuantity;
+    public string category;
+    public Image itemIcon;
 
     private Item item;
     private Vector3 originalPosition;
@@ -16,10 +18,45 @@ public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     private InventoryUI inventoryUI;
     private GameObject draggingIcon;
 
+    private void Awake()
+    {
+        category = gameObject.name;
+    }
+
     private void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         inventoryUI = FindObjectOfType<InventoryUI>();
+    }
+
+    public bool SetItem(Item newItem)
+    {
+        if (itemIcon == null)
+        {
+            Debug.LogError("itemIcon не установлен в инспекторе для " + gameObject.name);
+            return false;
+        }
+
+        if (newItem != null)
+        {
+            if (newItem.icon == null)
+            {
+                Debug.LogError("Item icon is null for item: " + newItem.itemName);
+                return false;
+            }
+            itemIcon.sprite = newItem.icon;
+            itemIcon.enabled = true;
+            item = newItem;
+            Debug.Log("Item set in AmmoSlot: " + newItem.itemName);
+        }
+        else
+        {
+            itemIcon.sprite = null;
+            itemIcon.enabled = false;
+            item = null;
+        }
+
+        return true;
     }
 
     public void AddItem(string newItemName, int quantity)
@@ -32,7 +69,7 @@ public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         {
             icon.sprite = item.icon;
             icon.enabled = true;
-            Debug.Log($"Item '{itemName}' added to ammo slot with quantity {itemQuantity}.");
+            Debug.Log($"Item '{itemName}' added to ammo slot {category} with quantity {itemQuantity}.");
         }
         else
         {
@@ -45,13 +82,19 @@ public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     {
         itemName = null;
         itemQuantity = 0;
+        item = null;
         icon.sprite = null;
         icon.enabled = false;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public bool IsSlotEmpty()
     {
-        // Custom logic for clicking on ammo slot if needed
+        return item == null;
+    }
+
+    public Item GetItem()
+    {
+        return item;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -87,13 +130,23 @@ public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
         {
             Destroy(draggingIcon);
         }
+        bool itemMoved = false;
+        MoveToInventory();
 
+        if (!itemMoved)
+        {
+            transform.position = originalPosition;
+            transform.SetParent(originalParent);
+        }
+    }
+
+    private void MoveToInventory()
+    {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = Input.mousePosition;
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, results);
 
-        bool itemMoved = false;
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.GetComponent<InventorySlot>() != null)
@@ -119,20 +172,13 @@ public class AmmoSlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
                     {
                         ItemPickup.itemInventory.Add(itemName, itemQuantity);
                     }
-                    inventoryUI.inventory.inventoryWeight.AddWeight(item.itemWeight);
                     ClearSlot();
                     inventoryUI.UpdateUI();
+                    //inventoryUI.UpdateAmmoUI();
                     Debug.Log("Item moved back to inventory slot.");
-                    itemMoved = true;
                     break;
                 }
             }
-        }
-
-        if (!itemMoved)
-        {
-            transform.position = originalPosition;
-            transform.SetParent(originalParent);
         }
     }
 }

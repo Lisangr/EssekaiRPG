@@ -11,6 +11,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     public int itemQuantity;
     public Text quantityText;
     public int index;
+    public string category;
 
     private Item item;
     private Vector3 originalPosition;
@@ -30,6 +31,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         inventoryWeight = FindObjectOfType<InventoryWeight>();
         inventoryWallet = FindObjectOfType<InventoryWallet>();
         removeButton.onClick.AddListener(OnRemoveButton);
+
+        category = gameObject.name;
     }
 
     private void Update()
@@ -103,35 +106,47 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         inventoryWeight.RemoveWeight(item.itemWeight);
         inventoryUI.UpdateUI();
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right && !TraderPanel.tradePossible)
+        // Проверяем, что клик произошел правой кнопкой мыши
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (ItemPickup.itemInventory.TryGetValue(itemName, out int quantity))
+            // Получаем категорию текущего слота
+            string category = gameObject.name;
+
+            // Ищем все объекты с компонентом AmmoSlot
+            AmmoSlot[] ammoSlots = FindObjectsOfType<AmmoSlot>();
+
+            // Перемещаем предмет в соответствующий слот
+            foreach (AmmoSlot ammoSlot in ammoSlots)
             {
-                if (quantity > 1)
+                if (ammoSlot.category == item.category)
                 {
-                    quantity -= 1;
-                    ItemPickup.itemInventory[itemName] = quantity;
-                }
-                else if (quantity == 1)
-                {
-                    ItemPickup.itemInventory.Remove(itemName);
+                    // Устанавливаем иконку предмета в ammoSlot
+                    if (ammoSlot.SetItem(item))
+                    {
+                        // Очистка текущего слота (по желанию)
+                        //item = null;
+
+                        inventoryUI.inventory.AddToAmmoInventory(itemName, itemQuantity);
+                        ammoSlot.AddItem(itemName, itemQuantity);
+                        ItemPickup.itemInventory.Remove(itemName);
+                        ClearSlot();
+
+                        Debug.Log("Item successfully moved to AmmoSlot: " + ammoSlot.gameObject.name);
+                        
+                        break;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Failed to set item in AmmoSlot: " + ammoSlot.gameObject.name);
+                    }
+                    break;
                 }
             }
-            inventoryWeight.RemoveWeight(item.itemWeight);
-            inventoryUI.UpdateUI();
-        }
-        if (eventData.button == PointerEventData.InputButton.Right && TraderPanel.tradePossible)
-        {
-            TradingItems();
-            ClearSlot();
-            inventoryUI.UpdateUI();
-            Debug.Log("ПРЕДМЕТ ПРОДАН ПАРВОЙ КНОПКОЙ");
         }
     }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         originalParent = transform.parent;
@@ -221,20 +236,21 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
                 }
             }
             else if (result.gameObject.CompareTag("AmmoSlot"))
-            {
+            {                
                 AmmoSlot ammoSlot = result.gameObject.GetComponent<AmmoSlot>();
-                if (ammoSlot != null)
+                if (ammoSlot != null && ammoSlot.category == item.category)
                 {
                     inventoryUI.inventory.AddToAmmoInventory(itemName, itemQuantity);
                     ammoSlot.AddItem(itemName, itemQuantity);
                     ItemPickup.itemInventory.Remove(itemName);
                     ClearSlot();
+                    //inventoryUI.UpdateAmmoUI();
                     inventoryUI.UpdateUI();
                     Debug.Log("Item moved to ammo slot.");
                     itemMoved = true;
                     break;
                 }
-            }
+            }            
         }
 
         if (!itemMoved)
@@ -243,61 +259,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             transform.SetParent(originalParent);
         }
     }
-    /*
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.blocksRaycasts = true;
-        if (draggingIcon != null)
-        {
-            Destroy(draggingIcon);
-        }
-
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, results);
-
-        bool itemMoved = false;
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.GetComponent<InventorySlot>() != null)
-            {
-                InventorySlot targetSlot = result.gameObject.GetComponent<InventorySlot>();
-
-                if (targetSlot != null)
-                {
-                    string tempItemName = targetSlot.itemName;
-                    int tempItemQuantity = targetSlot.itemQuantity;
-                    targetSlot.AddItem(itemName, itemQuantity);
-                    AddItem(tempItemName, tempItemQuantity);
-                    inventoryWeight.RemoveWeight(item.itemWeight);
-                    itemMoved = true;
-                    break;
-                }
-            }
-            else if (result.gameObject.CompareTag("AmmoSlot"))
-            {
-                AmmoSlot ammoSlot = result.gameObject.GetComponent<AmmoSlot>();
-                if (ammoSlot != null)
-                {
-                    inventoryUI.inventory.AddToAmmoInventory(itemName, itemQuantity);
-                    ammoSlot.AddItem(itemName, itemQuantity);
-                    ItemPickup.itemInventory.Remove(itemName);
-                    ClearSlot();
-                    inventoryUI.UpdateUI();
-                    Debug.Log("Item moved to ammo slot.");
-                    itemMoved = true;
-                    break;
-                }
-            }
-        }
-
-        if (!itemMoved)
-        {
-            transform.position = originalPosition;
-            transform.SetParent(originalParent);
-        }
-    }*/
 
     private void CreateDroppedItem()
     {

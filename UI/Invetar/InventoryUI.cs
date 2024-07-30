@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
@@ -6,13 +7,16 @@ public class InventoryUI : MonoBehaviour
     public Inventory inventory;
     public GameObject inventorySlotPrefab;
     private InventorySlot[] slots;
+    private InventorySlot inventorySlots;
     private AmmoSlot[] ammoSlots;
+    private Item item;
 
     private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         ammoSlots = FindObjectsOfType<AmmoSlot>();
+        inventorySlots = gameObject.GetComponent<InventorySlot>();
     }
 
     private void OnEnable()
@@ -36,12 +40,18 @@ public class InventoryUI : MonoBehaviour
         for (; i < slots.Length; i++)
         {
             slots[i].ClearSlot();
-        }
+        }        
+    }
 
+    public void UpdateAmmoUI()
+    {
         // Update ammo slots
         foreach (var ammoSlot in ammoSlots)
         {
-            ammoSlot.ClearSlot();
+            //if (item.category == ammoSlot.category && item.category != inventorySlots.category)
+            //{
+                ammoSlot.ClearSlot();
+            //}
         }
 
         foreach (var item in Inventory.ammoInventory)
