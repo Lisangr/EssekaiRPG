@@ -1,0 +1,207 @@
+Received POST data: Array
+(
+    [type] => logining
+    [login] => 123​
+    [password] => 123​
+)
+Processing login...
+User details: Array
+(
+    [0] => Array
+        (
+            [id] => 124
+            [userID] => 44
+            [userMale] => 
+            [userClass] => 
+            [nickname] => 
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+    [1] => Array
+        (
+            [id] => 125
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => 123​
+            [lvl] => 10
+            [exp] => 25525
+            [current_money] => 0
+        )
+
+)
+
+Response data: Array
+(
+    [playerInfo] => Array
+        (
+            [hasCharacters] => 1
+            [nickname] => 123​
+            [userMale] => man
+            [userClass] => Elf
+        )
+
+    [error] => Array
+        (
+            [errorText] => empty
+            [isErrored] => 
+        )
+
+    [userID] => 44
+)
+Received POST data: Array
+(
+    [type] => logining
+    [login] => 123​
+    [password] => 123​
+)
+Processing login...
+User details: Array
+(
+    [0] => Array
+        (
+            [id] => 124
+            [userID] => 44
+            [userMale] => 
+            [userClass] => 
+            [nickname] => 
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+    [1] => Array
+        (
+            [id] => 125
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => 123​
+            [lvl] => 10
+            [exp] => 25525
+            [current_money] => 0
+        )
+
+    [2] => Array
+        (
+            [id] => 126
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => 123456​
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+    [3] => Array
+        (
+            [id] => 127
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => ячсячсячс​
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+)
+
+Response data: Array
+(
+    [playerInfo] => Array
+        (
+            [hasCharacters] => 1
+            [nickname] => 123​
+            [userMale] => man
+            [userClass] => Elf
+        )
+
+    [error] => Array
+        (
+            [errorText] => empty
+            [isErrored] => 
+        )
+
+    [userID] => 44
+)
+Received POST data: Array
+(
+    [type] => logining
+    [login] => 123​
+    [password] => 123​
+)
+Processing login...
+User details: Array
+(
+    [0] => Array
+        (
+            [id] => 124
+            [userID] => 44
+            [userMale] => 
+            [userClass] => 
+            [nickname] => 
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+    [1] => Array
+        (
+            [id] => 125
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => 123​
+            [lvl] => 10
+            [exp] => 25525
+            [current_money] => 0
+        )
+
+    [2] => Array
+        (
+            [id] => 126
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => 123456​
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+    [3] => Array
+        (
+            [id] => 127
+            [userID] => 44
+            [userMale] => man
+            [userClass] => Elf
+            [nickname] => ячсячсячс​
+            [lvl] => 1
+            [exp] => 0
+            [current_money] => 0
+        )
+
+)
+
+Response data: Array
+(
+    [playerInfo] => Array
+        (
+            [hasCharacters] => 1
+            [nickname] => 123​
+            [userMale] => man
+            [userClass] => Elf
+        )
+
+    [error] => Array
+        (
+            [errorText] => empty
+            [isErrored] => 
+        )
+
+    [userID] => 44
+)

@@ -1,0 +1,30 @@
+Received POST data: Array
+(
+    [userID] => 44
+    [nickname] => 123456​
+    [userMale] => man
+    [userClass] => Elf
+)
+Inserted into userdata with ID: 126
+Array
+(
+    [userID] => 44
+    [nickname] => 123456​
+    [userMale] => man
+    [userClass] => Elf
+)
+Received POST data: Array
+(
+    [userID] => 44
+    [nickname] => ячсячсячс​
+    [userMale] => man
+    [userClass] => Elf
+)
+Inserted into userdata with ID: 127
+Array
+(
+    [userID] => 44
+    [nickname] => ячсячсячс​
+    [userMale] => man
+    [userClass] => Elf
+)

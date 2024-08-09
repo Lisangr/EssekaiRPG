@@ -1,0 +1,230 @@
+<?php
+// Включаем отображение ошибок для отладки
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+function write_log($message)
+{
+    file_put_contents('charactercustomisation.log', date("Y-m-d H:i:s") . " - " . $message . PHP_EOL, FILE_APPEND);
+}
+
+write_log("Script started");
+
+// Параметры подключения к базе данных
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "register_db";
+
+// Создаем соединение
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Проверяем соединение
+if ($conn->connect_error) {
+    write_log("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
+}
+
+write_log("Connected to database");
+
+// Логируем полученные данные
+write_log("Received POST data: " . print_r($_POST, true));
+
+// Функция для замены запятых на точки и преобразования в float
+function sanitize_float($value)
+{
+    $sanitized_value = floatval(str_replace(',', '.', $value));
+    write_log("Sanitized value: $value to $sanitized_value");
+    return $sanitized_value;
+}
+
+// Функция для очистки строковых значений
+function sanitize_string($conn, $value)
+{
+    $sanitized_value = $conn->real_escape_string($value);
+    write_log("Sanitized string value: $value to $sanitized_value");
+    return $sanitized_value;
+}
+
+// Получаем данные из запроса и логируем их
+$userdata_id = intval($_POST['userdata_id']);
+$scaleX = sanitize_float($_POST['scaleX']);
+$scaleY = sanitize_float($_POST['scaleY']);
+$scaleZ = sanitize_float($_POST['scaleZ']);
+
+$hairR = sanitize_float($_POST['HairSliderR']);
+$hairG = sanitize_float($_POST['HairSliderG']);
+$hairB = sanitize_float($_POST['HairSliderB']);
+
+$skinR = sanitize_float($_POST['SkinSliderR']);
+$skinG = sanitize_float($_POST['SkinSliderG']);
+$skinB = sanitize_float($_POST['SkinSliderB']);
+
+$bodyArtR = sanitize_float($_POST['BodyArtSliderR']);
+$bodyArtG = sanitize_float($_POST['BodyArtSliderG']);
+$bodyArtB = sanitize_float($_POST['BodyArtSliderB']);
+
+$eyesR = sanitize_float($_POST['EyesSliderR']);
+$eyesG = sanitize_float($_POST['EyesSliderG']);
+$eyesB = sanitize_float($_POST['EyesSliderB']);
+
+$primaryR = sanitize_float($_POST['PrimarySliderR']);
+$primaryG = sanitize_float($_POST['PrimarySliderG']);
+$primaryB = sanitize_float($_POST['PrimarySliderB']);
+
+$secondaryR = sanitize_float($_POST['SecondarySliderR']);
+$secondaryG = sanitize_float($_POST['SecondarySliderG']);
+$secondaryB = sanitize_float($_POST['SecondarySliderB']);
+
+$leatherPrimaryR = sanitize_float($_POST['LeatherPrimarySliderR']);
+$leatherPrimaryG = sanitize_float($_POST['LeatherPrimarySliderG']);
+$leatherPrimaryB = sanitize_float($_POST['LeatherPrimarySliderB']);
+
+$metalPrimaryR = sanitize_float($_POST['MetalPrimarySliderR']);
+$metalPrimaryG = sanitize_float($_POST['MetalPrimarySliderG']);
+$metalPrimaryB = sanitize_float($_POST['MetalPrimarySliderB']);
+
+$leatherSecondaryR = sanitize_float($_POST['LeatherSecondarySliderR']);
+$leatherSecondaryG = sanitize_float($_POST['LeatherSecondarySliderG']);
+$leatherSecondaryB = sanitize_float($_POST['LeatherSecondarySliderB']);
+
+$metalSecondaryR = sanitize_float($_POST['MetalSecondarySliderR']);
+$metalSecondaryG = sanitize_float($_POST['MetalSecondarySliderG']);
+$metalSecondaryB = sanitize_float($_POST['MetalSecondarySliderB']);
+
+$metalDarkR = sanitize_float($_POST['MetalDarkSliderR']);
+$MetalDarkG = sanitize_float($_POST['MetalDarkSliderG']);
+$metalDarkB = sanitize_float($_POST['MetalDarkSliderB']);
+
+// Получаем сохраненные элементы с проверкой
+$Male_Head_All_Elements = isset($_POST['Male_Head_All_Elements']) ? sanitize_string($conn, $_POST['Male_Head_All_Elements']) : '';
+$Male_01_Eyebrows = isset($_POST['Male_01_Eyebrows']) ? sanitize_string($conn, $_POST['Male_01_Eyebrows']) : '';
+$Male_02_FacialHair = isset($_POST['Male_02_FacialHair']) ? sanitize_string($conn, $_POST['Male_02_FacialHair']) : '';
+$All_01_Hair = isset($_POST['All_01_Hair']) ? sanitize_string($conn, $_POST['All_01_Hair']) : '';
+$HeadCoverings_Base_Hair = isset($_POST['HeadCoverings_Base_Hair']) ? sanitize_string($conn, $_POST['HeadCoverings_Base_Hair']) : '';
+
+write_log("Parsed POST data: " . print_r([
+    'scaleX' => $scaleX,
+    'scaleY' => $scaleY,
+    'scaleZ' => $scaleZ,
+    'hairR' => $hairR,
+    'hairG' => $hairG,
+    'hairB' => $hairB,
+    'skinR' => $skinR,
+    'skinG' => $skinG,
+    'skinB' => $skinB,
+    'bodyArtR' => $bodyArtR,
+    'bodyArtG' => $bodyArtG,
+    'bodyArtB' => $bodyArtB,
+    'eyesR' => $eyesR,
+    'eyesG' => $eyesG,
+    'eyesB' => $eyesB,
+    'primaryR' => $primaryR,
+    'primaryG' => $primaryG,
+    'primaryB' => $primaryB,
+    'secondaryR' => $secondaryR,
+    'secondaryG' => $secondaryG,
+    'secondaryB' => $secondaryB,
+    'leatherPrimaryR' => $leatherPrimaryR,
+    'leatherPrimaryG' => $leatherPrimaryG,
+    'leatherPrimaryB' => $leatherPrimaryB,
+    'metalPrimaryR' => $metalPrimaryR,
+    'metalPrimaryG' => $metalPrimaryG,
+    'metalPrimaryB' => $metalPrimaryB,
+    'leatherSecondaryR' => $leatherSecondaryR,
+    'leatherSecondaryG' => $leatherSecondaryG,
+    'leatherSecondaryB' => $leatherSecondaryB,
+    'metalSecondaryR' => $metalSecondaryR,
+    'metalSecondaryG' => $metalSecondaryG,
+    'metalSecondaryB' => $metalSecondaryB,
+    'metalDarkR' => $metalDarkR,
+    'MetalDarkG' => $MetalDarkG,
+    'metalDarkB' => $metalDarkB,
+    'Male_Head_All_Elements' => $Male_Head_All_Elements,
+    'Male_01_Eyebrows' => $Male_01_Eyebrows,
+    'Male_02_FacialHair' => $Male_02_FacialHair,
+    'All_01_Hair' => $All_01_Hair,
+    'HeadCoverings_Base_Hair' => $HeadCoverings_Base_Hair
+], true));
+
+// Проверяем, существует ли уже запись для данного userdata_id
+$sql = "SELECT id FROM usercustomiser WHERE userdata_id = $userdata_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    write_log("Record exists for userdata_id: $userdata_id");
+
+    // Если запись существует, обновляем её
+    $sql = "UPDATE usercustomiser SET scaleX = $scaleX, scaleY = $scaleY, scaleZ = $scaleZ, 
+            HairSliderR = $hairR, HairSliderG = $hairG, HairSliderB = $hairB, 
+            SkinSliderR = $skinR, SkinSliderG = $skinG, SkinSliderB = $skinB, 
+            BodyArtSliderR = $bodyArtR, BodyArtSliderG = $bodyArtSliderG, BodyArtSliderB = $bodyArtB, 
+            EyesSliderR = $eyesR, EyesSliderG = $eyesG, EyesSliderB = $eyesB, 
+            PrimarySliderR = $primaryR, PrimarySliderG = $primaryG, PrimarySliderB = $primaryB, 
+            SecondarySliderR = $secondaryR, SecondarySliderG = $secondaryG, SecondarySliderB = $secondaryB, 
+            LeatherPrimarySliderR = $leatherPrimaryR, LeatherPrimarySliderG = $leatherPrimaryG, LeatherPrimarySliderB = $leatherPrimaryB, 
+            MetalPrimarySliderR = $metalPrimaryR, MetalPrimarySliderG = $metalPrimaryG, MetalPrimaryB = $metalPrimaryB, 
+            LeatherSecondarySliderR = $leatherSecondaryR, LeatherSecondarySliderG = $leatherSecondaryG, LeatherSecondarySliderB = $leatherSecondaryB, 
+            MetalSecondarySliderR = $metalSecondaryR, MetalSecondarySliderG = $metalSecondaryG, MetalSecondaryB = $metalSecondaryB, 
+            MetalDarkSliderR = $metalDarkR, MetalDarkSliderG = $MetalDarkG, MetalDarkSliderB = $metalDarkB, 
+            Male_Head_All_Elements = '$Male_Head_All_Elements', Male_01_Eyebrows = '$Male_01_Eyebrows', Male_02_FacialHair = '$Male_02_FacialHair', All_01_Hair = '$All_01_Hair', HeadCoverings_Base_Hair = '$HeadCoverings_Base_Hair'
+            WHERE userdata_id = $userdata_id";
+
+    write_log("Executing UPDATE query: $sql");
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Success";
+        write_log("Update successful for userdata_id: $userdata_id");
+    } else {
+        write_log("SQL Error (Update): " . $conn->error);
+        echo "Error: " . $conn->error;
+    }
+} else {
+    write_log("No record exists for userdata_id: $userdata_id");
+
+    // Если записи не существует, вставляем новую
+    $sql = "INSERT INTO usercustomiser (userdata_id, scaleX, scaleY, scaleZ,
+            HairSliderR, HairSliderG, HairSliderB, 
+            SkinSliderR, SkinSliderG, SkinSliderB, 
+            BodyArtSliderR, BodyArtSliderG, BodyArtSliderB, 
+            EyesSliderR, EyesSliderG, EyesSliderB, 
+            PrimarySliderR, PrimarySliderG, PrimarySliderB, 
+            SecondarySliderR, SecondarySliderG, SecondarySliderB, 
+            LeatherPrimarySliderR, LeatherPrimarySliderG, LeatherPrimarySliderB, 
+            MetalPrimarySliderR, MetalPrimarySliderG, MetalPrimarySliderB, 
+            LeatherSecondarySliderR, LeatherSecondarySliderG, LeatherSecondarySliderB, 
+            MetalSecondarySliderR, MetalSecondarySliderG, MetalSecondarySliderB, 
+            MetalDarkSliderR, MetalDarkSliderG, MetalDarkSliderB, 
+            Male_Head_All_Elements, Male_01_Eyebrows, Male_02_FacialHair, All_01_Hair, HeadCoverings_Base_Hair) 
+            VALUES ($userdata_id, $scaleX, $scaleY, $scaleZ,
+            $hairR, $hairG, $hairB, 
+            $skinR, $skinG, $skinB, 
+            $bodyArtR, $bodyArtG, $bodyArtB, 
+            $eyesR, $eyesG, $eyesB, 
+            $primaryR, $primaryG, $primaryB, 
+            $secondaryR, $secondaryG, $secondaryB, 
+            $leatherPrimaryR, $leatherPrimaryG, $leatherPrimaryB, 
+            $metalPrimaryR, $metalPrimaryG, $metalPrimaryB, 
+            $leatherSecondaryR, $leatherSecondaryG, $leatherSecondaryB, 
+            $metalSecondaryR, $metalSecondaryG, $metalSecondaryB, 
+            $metalDarkR, $MetalDarkG, $metalDarkB, 
+            '$Male_Head_All_Elements', '$Male_01_Eyebrows', '$Male_02_FacialHair', '$All_01_Hair', '$HeadCoverings_Base_Hair')";
+
+    write_log("Executing INSERT query: $sql");
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Success";
+        write_log("Insert successful for userdata_id: $userdata_id");
+    } else {
+        write_log("SQL Error (Insert): " . $conn->error);
+        write_log("SQL Error (Insert) code: " . $conn->errno);
+        write_log("SQL Error (Insert) message: " . $conn->error);
+        echo "Error: " . $conn->error;
+    }
+}
+
+$conn->close();
+
+write_log("Script executed with POST data: " . print_r($_POST, true));
+?>

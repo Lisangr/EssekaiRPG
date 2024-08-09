@@ -1,0 +1,401 @@
+[2024-07-30 23:53:08] Connection to database successful
+[2024-07-30 23:53:08] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 1
+    [itemName] => Axe
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:08] Request processed successfully
+[2024-07-30 23:53:08] Connection to database successful
+[2024-07-30 23:53:08] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 2
+    [itemName] => BigSword
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:08] Request processed successfully
+[2024-07-30 23:53:09] Connection to database successful
+[2024-07-30 23:53:09] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 3
+    [itemName] => Bow
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:09] Request processed successfully
+[2024-07-30 23:53:09] Connection to database successful
+[2024-07-30 23:53:09] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 4
+    [itemName] => Chakram
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:09] Request processed successfully
+[2024-07-30 23:53:10] Connection to database successful
+[2024-07-30 23:53:10] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 5
+    [itemName] => Dagger
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:10] Request processed successfully
+[2024-07-30 23:53:10] Connection to database successful
+[2024-07-30 23:53:10] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 6
+    [itemName] => Hammer
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:10] Request processed successfully
+[2024-07-30 23:53:11] Connection to database successful
+[2024-07-30 23:53:11] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 7
+    [itemName] => Horn
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-30 23:53:11] Request processed successfully
+[2024-07-30 23:53:27] Connection to database successful
+[2024-07-30 23:53:27] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:53:27] Inserted new item: Potion, quantity: 1
+[2024-07-30 23:53:27] Request processed successfully
+[2024-07-30 23:53:28] Connection to database successful
+[2024-07-30 23:53:28] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:53:28] Updated item: Potion, new quantity: 2
+[2024-07-30 23:53:28] Request processed successfully
+[2024-07-30 23:53:31] Connection to database successful
+[2024-07-30 23:53:31] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 3
+    [isRemove] => 
+)
+
+[2024-07-30 23:53:31] Updated item: Potion, new quantity: 3
+[2024-07-30 23:53:31] Request processed successfully
+[2024-07-30 23:53:43] Connection to database successful
+[2024-07-30 23:53:43] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:53:43] Updated item: Potion, new quantity: 2
+[2024-07-30 23:53:43] Request processed successfully
+[2024-07-30 23:53:52] Connection to database successful
+[2024-07-30 23:53:52] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:53:52] Updated item: Potion, new quantity: 1
+[2024-07-30 23:53:52] Request processed successfully
+[2024-07-30 23:54:01] Connection to database successful
+[2024-07-30 23:54:01] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 8
+    [itemName] => Potion
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:01] Updated item: Potion, new quantity: 2
+[2024-07-30 23:54:01] Request processed successfully
+[2024-07-30 23:54:02] Connection to database successful
+[2024-07-30 23:54:02] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 1
+    [itemName] => Axe
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:02] Inserted new item: Axe, quantity: 1
+[2024-07-30 23:54:02] Request processed successfully
+[2024-07-30 23:54:03] Connection to database successful
+[2024-07-30 23:54:03] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 9
+    [itemName] => Scepter
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:03] Inserted new item: Scepter, quantity: 1
+[2024-07-30 23:54:03] Request processed successfully
+[2024-07-30 23:54:04] Connection to database successful
+[2024-07-30 23:54:04] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 1
+    [itemName] => Axe
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:04] Updated item: Axe, new quantity: 2
+[2024-07-30 23:54:04] Request processed successfully
+[2024-07-30 23:54:09] Connection to database successful
+[2024-07-30 23:54:09] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 13
+    [itemName] => Wand
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:09] Inserted new item: Wand, quantity: 1
+[2024-07-30 23:54:09] Request processed successfully
+[2024-07-30 23:54:10] Connection to database successful
+[2024-07-30 23:54:10] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 2
+    [itemName] => BigSword
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:10] Inserted new item: BigSword, quantity: 1
+[2024-07-30 23:54:10] Request processed successfully
+[2024-07-30 23:54:11] Connection to database successful
+[2024-07-30 23:54:11] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 6
+    [itemName] => Hammer
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:11] Inserted new item: Hammer, quantity: 1
+[2024-07-30 23:54:11] Request processed successfully
+[2024-07-30 23:54:12] Connection to database successful
+[2024-07-30 23:54:12] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 2
+    [itemName] => BigSword
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:12] Updated item: BigSword, new quantity: 2
+[2024-07-30 23:54:12] Request processed successfully
+[2024-07-30 23:54:20] Connection to database successful
+[2024-07-30 23:54:20] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 7
+    [itemName] => Horn
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:20] Inserted new item: Horn, quantity: 1
+[2024-07-30 23:54:20] Request processed successfully
+[2024-07-30 23:54:23] Connection to database successful
+[2024-07-30 23:54:23] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 1
+    [itemName] => Axe
+    [quantity] => 3
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:23] Updated item: Axe, new quantity: 3
+[2024-07-30 23:54:23] Request processed successfully
+[2024-07-30 23:54:25] Connection to database successful
+[2024-07-30 23:54:25] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 6
+    [itemName] => Hammer
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:25] Updated item: Hammer, new quantity: 2
+[2024-07-30 23:54:25] Request processed successfully
+[2024-07-30 23:54:27] Connection to database successful
+[2024-07-30 23:54:27] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 5
+    [itemName] => Dagger
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:27] Inserted new item: Dagger, quantity: 1
+[2024-07-30 23:54:27] Request processed successfully
+[2024-07-30 23:54:29] Connection to database successful
+[2024-07-30 23:54:29] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 4
+    [itemName] => Chakram
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:29] Inserted new item: Chakram, quantity: 1
+[2024-07-30 23:54:29] Request processed successfully
+[2024-07-30 23:54:30] Connection to database successful
+[2024-07-30 23:54:30] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 5
+    [itemName] => Dagger
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:30] Updated item: Dagger, new quantity: 2
+[2024-07-30 23:54:30] Request processed successfully
+[2024-07-30 23:54:31] Connection to database successful
+[2024-07-30 23:54:31] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 3
+    [itemName] => Bow
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:31] Inserted new item: Bow, quantity: 1
+[2024-07-30 23:54:31] Request processed successfully
+[2024-07-30 23:54:33] Connection to database successful
+[2024-07-30 23:54:33] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 7
+    [itemName] => Horn
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:33] Updated item: Horn, new quantity: 2
+[2024-07-30 23:54:33] Request processed successfully
+[2024-07-30 23:54:34] Connection to database successful
+[2024-07-30 23:54:34] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 11
+    [itemName] => Shield
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:34] Inserted new item: Shield, quantity: 1
+[2024-07-30 23:54:34] Request processed successfully
+[2024-07-30 23:54:41] Connection to database successful
+[2024-07-30 23:54:41] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 12
+    [itemName] => Spellbook
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:41] Inserted new item: Spellbook, quantity: 1
+[2024-07-30 23:54:41] Request processed successfully
+[2024-07-30 23:54:42] Connection to database successful
+[2024-07-30 23:54:42] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 4
+    [itemName] => Chakram
+    [quantity] => 2
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:42] Updated item: Chakram, new quantity: 2
+[2024-07-30 23:54:42] Request processed successfully
+[2024-07-30 23:54:45] Connection to database successful
+[2024-07-30 23:54:45] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 10
+    [itemName] => Scythe
+    [quantity] => 1
+    [isRemove] => 
+)
+
+[2024-07-30 23:54:45] Inserted new item: Scythe, quantity: 1
+[2024-07-30 23:54:45] Request processed successfully
+[2024-07-31 00:06:49] Connection to database successful
+[2024-07-31 00:06:49] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 10
+    [itemName] => Scythe
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-31 00:06:49] Removed item ID: 10 from inventory
+[2024-07-31 00:06:49] Request processed successfully
+[2024-07-31 00:06:50] Connection to database successful
+[2024-07-31 00:06:50] Received data: Array
+(
+    [userId] => 127
+    [itemId] => 12
+    [itemName] => Spellbook
+    [quantity] => 0
+    [isRemove] => 1
+)
+
+[2024-07-31 00:06:50] Removed item ID: 12 from inventory
+[2024-07-31 00:06:50] Request processed successfully

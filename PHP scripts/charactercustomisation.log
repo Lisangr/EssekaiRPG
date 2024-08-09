@@ -1,0 +1,408 @@
+2024-07-29 12:30:40 - Script started
+2024-07-29 12:30:40 - Connected to database
+2024-07-29 12:30:40 - Received POST data: Array
+(
+    [userdata_id] => 126
+    [scaleX] => 30
+    [scaleY] => 30
+    [scaleZ] => 30
+    [HairSliderR] => 0.4
+    [HairSliderG] => 0.26
+    [HairSliderB] => 0.13
+    [SkinSliderR] => 1
+    [SkinSliderG] => 0.8
+    [SkinSliderB] => 0.6
+    [BodyArtSliderR] => 0
+    [BodyArtSliderG] => 0
+    [BodyArtSliderB] => 0
+    [EyesSliderR] => 0.2
+    [EyesSliderG] => 0.4
+    [EyesSliderB] => 0.8
+    [PrimarySliderR] => 0.5
+    [PrimarySliderG] => 0.5
+    [PrimarySliderB] => 0.5
+    [SecondarySliderR] => 0.5
+    [SecondarySliderG] => 0.5
+    [SecondarySliderB] => 0.5
+    [LeatherPrimarySliderR] => 0.5
+    [LeatherPrimarySliderG] => 0.3
+    [LeatherPrimarySliderB] => 0.2
+    [MetalPrimarySliderR] => 0.6
+    [MetalPrimarySliderG] => 0.6
+    [MetalPrimarySliderB] => 0.6
+    [LeatherSecondarySliderR] => 0.4
+    [LeatherSecondarySliderG] => 0.2
+    [LeatherSecondarySliderB] => 0.1
+    [MetalSecondarySliderR] => 0.5
+    [MetalSecondarySliderG] => 0.5
+    [MetalSecondarySliderB] => 0.5
+    [MetalDarkSliderR] => 0.2
+    [MetalDarkSliderG] => 0.2
+    [MetalDarkSliderB] => 0.2
+    [Female_Head_All_Elements] => Chr_Head_Female_02
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_02
+    [All_01_Hair] => Chr_Hair_03
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
+2024-07-29 12:30:40 - Sanitized value: 30 to 30
+2024-07-29 12:30:40 - Sanitized value: 30 to 30
+2024-07-29 12:30:40 - Sanitized value: 30 to 30
+2024-07-29 12:30:40 - Sanitized value: 0.4 to 0.4
+2024-07-29 12:30:40 - Sanitized value: 0.26 to 0.26
+2024-07-29 12:30:40 - Sanitized value: 0.13 to 0.13
+2024-07-29 12:30:40 - Sanitized value: 1 to 1
+2024-07-29 12:30:40 - Sanitized value: 0.8 to 0.8
+2024-07-29 12:30:40 - Sanitized value: 0.6 to 0.6
+2024-07-29 12:30:40 - Sanitized value: 0 to 0
+2024-07-29 12:30:40 - Sanitized value: 0 to 0
+2024-07-29 12:30:40 - Sanitized value: 0 to 0
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized value: 0.4 to 0.4
+2024-07-29 12:30:40 - Sanitized value: 0.8 to 0.8
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.3 to 0.3
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized value: 0.6 to 0.6
+2024-07-29 12:30:40 - Sanitized value: 0.6 to 0.6
+2024-07-29 12:30:40 - Sanitized value: 0.6 to 0.6
+2024-07-29 12:30:40 - Sanitized value: 0.4 to 0.4
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized value: 0.1 to 0.1
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.5 to 0.5
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized value: 0.2 to 0.2
+2024-07-29 12:30:40 - Sanitized string value: Chr_Eyebrow_Male_02 to Chr_Eyebrow_Male_02
+2024-07-29 12:30:40 - Sanitized string value: Chr_Hair_03 to Chr_Hair_03
+2024-07-29 12:30:40 - Sanitized string value: Chr_HeadCoverings_Base_Hair_03 to Chr_HeadCoverings_Base_Hair_03
+2024-07-29 12:30:40 - Parsed POST data: Array
+(
+    [scaleX] => 30
+    [scaleY] => 30
+    [scaleZ] => 30
+    [hairR] => 0.4
+    [hairG] => 0.26
+    [hairB] => 0.13
+    [skinR] => 1
+    [skinG] => 0.8
+    [skinB] => 0.6
+    [bodyArtR] => 0
+    [bodyArtG] => 0
+    [bodyArtB] => 0
+    [eyesR] => 0.2
+    [eyesG] => 0.4
+    [eyesB] => 0.8
+    [primaryR] => 0.5
+    [primaryG] => 0.5
+    [primaryB] => 0.5
+    [secondaryR] => 0.5
+    [secondaryG] => 0.5
+    [secondaryB] => 0.5
+    [leatherPrimaryR] => 0.5
+    [leatherPrimaryG] => 0.3
+    [leatherPrimaryB] => 0.2
+    [metalPrimaryR] => 0.6
+    [metalPrimaryG] => 0.6
+    [metalPrimaryB] => 0.6
+    [leatherSecondaryR] => 0.4
+    [leatherSecondaryG] => 0.2
+    [leatherSecondaryB] => 0.1
+    [metalSecondaryR] => 0.5
+    [metalSecondaryG] => 0.5
+    [metalSecondaryB] => 0.5
+    [metalDarkR] => 0.2
+    [MetalDarkG] => 0.2
+    [metalDarkB] => 0.2
+    [Male_Head_All_Elements] => 
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_02
+    [Male_02_FacialHair] => 
+    [All_01_Hair] => Chr_Hair_03
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
+2024-07-29 12:30:40 - No record exists for userdata_id: 126
+2024-07-29 12:30:40 - Executing INSERT query: INSERT INTO usercustomiser (userdata_id, scaleX, scaleY, scaleZ,
+            HairSliderR, HairSliderG, HairSliderB, 
+            SkinSliderR, SkinSliderG, SkinSliderB, 
+            BodyArtSliderR, BodyArtSliderG, BodyArtSliderB, 
+            EyesSliderR, EyesSliderG, EyesSliderB, 
+            PrimarySliderR, PrimarySliderG, PrimarySliderB, 
+            SecondarySliderR, SecondarySliderG, SecondarySliderB, 
+            LeatherPrimarySliderR, LeatherPrimarySliderG, LeatherPrimarySliderB, 
+            MetalPrimarySliderR, MetalPrimarySliderG, MetalPrimarySliderB, 
+            LeatherSecondarySliderR, LeatherSecondarySliderG, LeatherSecondarySliderB, 
+            MetalSecondarySliderR, MetalSecondarySliderG, MetalSecondarySliderB, 
+            MetalDarkSliderR, MetalDarkSliderG, MetalDarkSliderB, 
+            Male_Head_All_Elements, Male_01_Eyebrows, Male_02_FacialHair, All_01_Hair, HeadCoverings_Base_Hair) 
+            VALUES (126, 30, 30, 30,
+            0.4, 0.26, 0.13, 
+            1, 0.8, 0.6, 
+            0, 0, 0, 
+            0.2, 0.4, 0.8, 
+            0.5, 0.5, 0.5, 
+            0.5, 0.5, 0.5, 
+            0.5, 0.3, 0.2, 
+            0.6, 0.6, 0.6, 
+            0.4, 0.2, 0.1, 
+            0.5, 0.5, 0.5, 
+            0.2, 0.2, 0.2, 
+            '', 'Chr_Eyebrow_Male_02', '', 'Chr_Hair_03', 'Chr_HeadCoverings_Base_Hair_03')
+2024-07-29 12:30:40 - Insert successful for userdata_id: 126
+2024-07-29 12:30:40 - Script executed with POST data: Array
+(
+    [userdata_id] => 126
+    [scaleX] => 30
+    [scaleY] => 30
+    [scaleZ] => 30
+    [HairSliderR] => 0.4
+    [HairSliderG] => 0.26
+    [HairSliderB] => 0.13
+    [SkinSliderR] => 1
+    [SkinSliderG] => 0.8
+    [SkinSliderB] => 0.6
+    [BodyArtSliderR] => 0
+    [BodyArtSliderG] => 0
+    [BodyArtSliderB] => 0
+    [EyesSliderR] => 0.2
+    [EyesSliderG] => 0.4
+    [EyesSliderB] => 0.8
+    [PrimarySliderR] => 0.5
+    [PrimarySliderG] => 0.5
+    [PrimarySliderB] => 0.5
+    [SecondarySliderR] => 0.5
+    [SecondarySliderG] => 0.5
+    [SecondarySliderB] => 0.5
+    [LeatherPrimarySliderR] => 0.5
+    [LeatherPrimarySliderG] => 0.3
+    [LeatherPrimarySliderB] => 0.2
+    [MetalPrimarySliderR] => 0.6
+    [MetalPrimarySliderG] => 0.6
+    [MetalPrimarySliderB] => 0.6
+    [LeatherSecondarySliderR] => 0.4
+    [LeatherSecondarySliderG] => 0.2
+    [LeatherSecondarySliderB] => 0.1
+    [MetalSecondarySliderR] => 0.5
+    [MetalSecondarySliderG] => 0.5
+    [MetalSecondarySliderB] => 0.5
+    [MetalDarkSliderR] => 0.2
+    [MetalDarkSliderG] => 0.2
+    [MetalDarkSliderB] => 0.2
+    [Female_Head_All_Elements] => Chr_Head_Female_02
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_02
+    [All_01_Hair] => Chr_Hair_03
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
+2024-07-29 13:07:41 - Script started
+2024-07-29 13:07:41 - Connected to database
+2024-07-29 13:07:41 - Received POST data: Array
+(
+    [userdata_id] => 127
+    [scaleX] => 25.16495
+    [scaleY] => 37.26845
+    [scaleZ] => 22.76142
+    [HairSliderR] => 0.2999183
+    [HairSliderG] => 1
+    [HairSliderB] => 0
+    [SkinSliderR] => 1
+    [SkinSliderG] => 0
+    [SkinSliderB] => 0.2162028
+    [BodyArtSliderR] => 0.342222
+    [BodyArtSliderG] => 0.6445281
+    [BodyArtSliderB] => 0.8410274
+    [EyesSliderR] => 0.2
+    [EyesSliderG] => 0.4
+    [EyesSliderB] => 0.8
+    [PrimarySliderR] => 0.8227195
+    [PrimarySliderG] => 0.165965
+    [PrimarySliderB] => 0.7094854
+    [SecondarySliderR] => 0.2074579
+    [SecondarySliderG] => 0.8800897
+    [SecondarySliderB] => 0.3132655
+    [LeatherPrimarySliderR] => 0
+    [LeatherPrimarySliderG] => 0.9611928
+    [LeatherPrimarySliderB] => 0.550002
+    [MetalPrimarySliderR] => 0.8575402
+    [MetalPrimarySliderG] => 0.1722227
+    [MetalPrimarySliderB] => 0.3778177
+    [LeatherSecondarySliderR] => 0.4
+    [LeatherSecondarySliderG] => 0.8278632
+    [LeatherSecondarySliderB] => 0.1
+    [MetalSecondarySliderR] => 0.8406903
+    [MetalSecondarySliderG] => 0.1907318
+    [MetalSecondarySliderB] => 0.2889813
+    [MetalDarkSliderR] => 0.7647662
+    [MetalDarkSliderG] => 0.9086645
+    [MetalDarkSliderB] => 0.2
+    [Female_Head_All_Elements] => Chr_Head_Female_18
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_06
+    [All_01_Hair] => Chr_Hair_07
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
+2024-07-29 13:07:41 - Sanitized value: 25.16495 to 25.16495
+2024-07-29 13:07:41 - Sanitized value: 37.26845 to 37.26845
+2024-07-29 13:07:41 - Sanitized value: 22.76142 to 22.76142
+2024-07-29 13:07:41 - Sanitized value: 0.2999183 to 0.2999183
+2024-07-29 13:07:41 - Sanitized value: 1 to 1
+2024-07-29 13:07:41 - Sanitized value: 0 to 0
+2024-07-29 13:07:41 - Sanitized value: 1 to 1
+2024-07-29 13:07:41 - Sanitized value: 0 to 0
+2024-07-29 13:07:41 - Sanitized value: 0.2162028 to 0.2162028
+2024-07-29 13:07:41 - Sanitized value: 0.342222 to 0.342222
+2024-07-29 13:07:41 - Sanitized value: 0.6445281 to 0.6445281
+2024-07-29 13:07:41 - Sanitized value: 0.8410274 to 0.8410274
+2024-07-29 13:07:41 - Sanitized value: 0.2 to 0.2
+2024-07-29 13:07:41 - Sanitized value: 0.4 to 0.4
+2024-07-29 13:07:41 - Sanitized value: 0.8 to 0.8
+2024-07-29 13:07:41 - Sanitized value: 0.8227195 to 0.8227195
+2024-07-29 13:07:41 - Sanitized value: 0.165965 to 0.165965
+2024-07-29 13:07:41 - Sanitized value: 0.7094854 to 0.7094854
+2024-07-29 13:07:41 - Sanitized value: 0.2074579 to 0.2074579
+2024-07-29 13:07:41 - Sanitized value: 0.8800897 to 0.8800897
+2024-07-29 13:07:41 - Sanitized value: 0.3132655 to 0.3132655
+2024-07-29 13:07:41 - Sanitized value: 0 to 0
+2024-07-29 13:07:41 - Sanitized value: 0.9611928 to 0.9611928
+2024-07-29 13:07:41 - Sanitized value: 0.550002 to 0.550002
+2024-07-29 13:07:41 - Sanitized value: 0.8575402 to 0.8575402
+2024-07-29 13:07:41 - Sanitized value: 0.1722227 to 0.1722227
+2024-07-29 13:07:41 - Sanitized value: 0.3778177 to 0.3778177
+2024-07-29 13:07:41 - Sanitized value: 0.4 to 0.4
+2024-07-29 13:07:41 - Sanitized value: 0.8278632 to 0.8278632
+2024-07-29 13:07:41 - Sanitized value: 0.1 to 0.1
+2024-07-29 13:07:41 - Sanitized value: 0.8406903 to 0.8406903
+2024-07-29 13:07:41 - Sanitized value: 0.1907318 to 0.1907318
+2024-07-29 13:07:41 - Sanitized value: 0.2889813 to 0.2889813
+2024-07-29 13:07:41 - Sanitized value: 0.7647662 to 0.7647662
+2024-07-29 13:07:41 - Sanitized value: 0.9086645 to 0.9086645
+2024-07-29 13:07:41 - Sanitized value: 0.2 to 0.2
+2024-07-29 13:07:41 - Sanitized string value: Chr_Eyebrow_Male_06 to Chr_Eyebrow_Male_06
+2024-07-29 13:07:41 - Sanitized string value: Chr_Hair_07 to Chr_Hair_07
+2024-07-29 13:07:41 - Sanitized string value: Chr_HeadCoverings_Base_Hair_03 to Chr_HeadCoverings_Base_Hair_03
+2024-07-29 13:07:41 - Parsed POST data: Array
+(
+    [scaleX] => 25.16495
+    [scaleY] => 37.26845
+    [scaleZ] => 22.76142
+    [hairR] => 0.2999183
+    [hairG] => 1
+    [hairB] => 0
+    [skinR] => 1
+    [skinG] => 0
+    [skinB] => 0.2162028
+    [bodyArtR] => 0.342222
+    [bodyArtG] => 0.6445281
+    [bodyArtB] => 0.8410274
+    [eyesR] => 0.2
+    [eyesG] => 0.4
+    [eyesB] => 0.8
+    [primaryR] => 0.8227195
+    [primaryG] => 0.165965
+    [primaryB] => 0.7094854
+    [secondaryR] => 0.2074579
+    [secondaryG] => 0.8800897
+    [secondaryB] => 0.3132655
+    [leatherPrimaryR] => 0
+    [leatherPrimaryG] => 0.9611928
+    [leatherPrimaryB] => 0.550002
+    [metalPrimaryR] => 0.8575402
+    [metalPrimaryG] => 0.1722227
+    [metalPrimaryB] => 0.3778177
+    [leatherSecondaryR] => 0.4
+    [leatherSecondaryG] => 0.8278632
+    [leatherSecondaryB] => 0.1
+    [metalSecondaryR] => 0.8406903
+    [metalSecondaryG] => 0.1907318
+    [metalSecondaryB] => 0.2889813
+    [metalDarkR] => 0.7647662
+    [MetalDarkG] => 0.9086645
+    [metalDarkB] => 0.2
+    [Male_Head_All_Elements] => 
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_06
+    [Male_02_FacialHair] => 
+    [All_01_Hair] => Chr_Hair_07
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
+2024-07-29 13:07:41 - No record exists for userdata_id: 127
+2024-07-29 13:07:41 - Executing INSERT query: INSERT INTO usercustomiser (userdata_id, scaleX, scaleY, scaleZ,
+            HairSliderR, HairSliderG, HairSliderB, 
+            SkinSliderR, SkinSliderG, SkinSliderB, 
+            BodyArtSliderR, BodyArtSliderG, BodyArtSliderB, 
+            EyesSliderR, EyesSliderG, EyesSliderB, 
+            PrimarySliderR, PrimarySliderG, PrimarySliderB, 
+            SecondarySliderR, SecondarySliderG, SecondarySliderB, 
+            LeatherPrimarySliderR, LeatherPrimarySliderG, LeatherPrimarySliderB, 
+            MetalPrimarySliderR, MetalPrimarySliderG, MetalPrimarySliderB, 
+            LeatherSecondarySliderR, LeatherSecondarySliderG, LeatherSecondarySliderB, 
+            MetalSecondarySliderR, MetalSecondarySliderG, MetalSecondarySliderB, 
+            MetalDarkSliderR, MetalDarkSliderG, MetalDarkSliderB, 
+            Male_Head_All_Elements, Male_01_Eyebrows, Male_02_FacialHair, All_01_Hair, HeadCoverings_Base_Hair) 
+            VALUES (127, 25.16495, 37.26845, 22.76142,
+            0.2999183, 1, 0, 
+            1, 0, 0.2162028, 
+            0.342222, 0.6445281, 0.8410274, 
+            0.2, 0.4, 0.8, 
+            0.8227195, 0.165965, 0.7094854, 
+            0.2074579, 0.8800897, 0.3132655, 
+            0, 0.9611928, 0.550002, 
+            0.8575402, 0.1722227, 0.3778177, 
+            0.4, 0.8278632, 0.1, 
+            0.8406903, 0.1907318, 0.2889813, 
+            0.7647662, 0.9086645, 0.2, 
+            '', 'Chr_Eyebrow_Male_06', '', 'Chr_Hair_07', 'Chr_HeadCoverings_Base_Hair_03')
+2024-07-29 13:07:41 - Insert successful for userdata_id: 127
+2024-07-29 13:07:41 - Script executed with POST data: Array
+(
+    [userdata_id] => 127
+    [scaleX] => 25.16495
+    [scaleY] => 37.26845
+    [scaleZ] => 22.76142
+    [HairSliderR] => 0.2999183
+    [HairSliderG] => 1
+    [HairSliderB] => 0
+    [SkinSliderR] => 1
+    [SkinSliderG] => 0
+    [SkinSliderB] => 0.2162028
+    [BodyArtSliderR] => 0.342222
+    [BodyArtSliderG] => 0.6445281
+    [BodyArtSliderB] => 0.8410274
+    [EyesSliderR] => 0.2
+    [EyesSliderG] => 0.4
+    [EyesSliderB] => 0.8
+    [PrimarySliderR] => 0.8227195
+    [PrimarySliderG] => 0.165965
+    [PrimarySliderB] => 0.7094854
+    [SecondarySliderR] => 0.2074579
+    [SecondarySliderG] => 0.8800897
+    [SecondarySliderB] => 0.3132655
+    [LeatherPrimarySliderR] => 0
+    [LeatherPrimarySliderG] => 0.9611928
+    [LeatherPrimarySliderB] => 0.550002
+    [MetalPrimarySliderR] => 0.8575402
+    [MetalPrimarySliderG] => 0.1722227
+    [MetalPrimarySliderB] => 0.3778177
+    [LeatherSecondarySliderR] => 0.4
+    [LeatherSecondarySliderG] => 0.8278632
+    [LeatherSecondarySliderB] => 0.1
+    [MetalSecondarySliderR] => 0.8406903
+    [MetalSecondarySliderG] => 0.1907318
+    [MetalSecondarySliderB] => 0.2889813
+    [MetalDarkSliderR] => 0.7647662
+    [MetalDarkSliderG] => 0.9086645
+    [MetalDarkSliderB] => 0.2
+    [Female_Head_All_Elements] => Chr_Head_Female_18
+    [Male_01_Eyebrows] => Chr_Eyebrow_Male_06
+    [All_01_Hair] => Chr_Hair_07
+    [HeadCoverings_Base_Hair] => Chr_HeadCoverings_Base_Hair_03
+)
+
