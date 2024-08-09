@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
     public int index;
     public string category;
 
+    private Inventory inventory;
     private Item item;
     private Vector3 originalPosition;
     private Transform originalParent;
@@ -31,7 +32,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         inventoryWeight = FindObjectOfType<InventoryWeight>();
         inventoryWallet = FindObjectOfType<InventoryWallet>();
         removeButton.onClick.AddListener(OnRemoveButton);
-
+        inventory = FindObjectOfType<Inventory>();
         category = gameObject.name;
     }
 
@@ -88,7 +89,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
         quantityText.text = "";
         item = null;
     }
-
     public void OnRemoveButton()
     {
         if (ItemPickup.itemInventory.TryGetValue(itemName, out int quantity))
@@ -97,16 +97,23 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             {
                 quantity -= 1;
                 ItemPickup.itemInventory[itemName] = quantity;
+                inventory.SendInventoryData(item);
             }
             else if (quantity == 1)
             {
                 ItemPickup.itemInventory.Remove(itemName);
+                inventory.SendInventoryData(item, isRemove: true);
             }
+
+            inventoryWeight.RemoveWeight(item.itemWeight);
+            inventoryUI.UpdateUI();
         }
-        inventoryWeight.RemoveWeight(item.itemWeight);
-        inventoryUI.UpdateUI();
+        else
+        {
+            Debug.Log("Item not found in inventory: " + itemName);
+        }
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
         // Проверяем, что клик произошел правой кнопкой мыши
@@ -276,21 +283,30 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             {
                 Debug.LogWarning($"Prefab for item '{itemName}' not found in Resources/Items.");
             }
-        }
 
-        if (ItemPickup.itemInventory.TryGetValue(itemName, out int quantity))
-        {
-            if (quantity > 1)
+            if (ItemPickup.itemInventory.TryGetValue(itemName, out int quantity))
             {
-                quantity -= 1;
-                ItemPickup.itemInventory[itemName] = quantity;
+                if (quantity > 1)
+                {
+                    quantity -= 1;
+                    ItemPickup.itemInventory[itemName] = quantity;
+                    inventory.SendInventoryData(item);
+                }
+                else if (quantity == 1)
+                {
+                    ItemPickup.itemInventory.Remove(itemName);
+                    inventory.SendInventoryData(item, isRemove: true);
+                }
+
+                inventoryUI.UpdateUI();
             }
-            else if (quantity == 1)
+            else
             {
-                ItemPickup.itemInventory.Remove(itemName);
+                Debug.Log("Item not found in inventory: " + itemName);
             }
         }
     }
+
 
     private void TradingItems()
     {
@@ -300,17 +316,26 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHand
             Debug.Log("---===Метод продажи СРАБОТАЛ===---");
             inventoryWallet.AddMoney(item.sellPrice);
             Debug.Log("---===Получено " + item.sellPrice + " денег===---");
+
             if (ItemPickup.itemInventory.TryGetValue(itemName, out int quantity))
             {
                 if (quantity > 1)
                 {
                     quantity -= 1;
                     ItemPickup.itemInventory[itemName] = quantity;
+                    inventory.SendInventoryData(item);
                 }
                 else if (quantity == 1)
                 {
                     ItemPickup.itemInventory.Remove(itemName);
+                    inventory.SendInventoryData(item, isRemove: true);
                 }
+
+                inventoryUI.UpdateUI();
+            }
+            else
+            {
+                Debug.Log("Item not found in inventory: " + itemName);
             }
         }
     }

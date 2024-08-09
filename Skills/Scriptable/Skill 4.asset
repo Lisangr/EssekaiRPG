@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillSO
   key: 52
   skillPrefab: {fileID: 2990468006285254152, guid: f573e8c4dfd1bfb4d88f4afa8e9ba976, type: 3}
-  targetImage: {fileID: 3522681679397129913, guid: 28bdad0a8c4e778408c45fcde551eb7d, type: 3}
+  targetImage: {fileID: 21300000, guid: 5ae8a876658848c439892f8b25d79d30, type: 3}
   costMP: 20
-  timeFill: 7
+  countdown: 0
+  distance: 0
   isPlayerToEnemy: 0
   damage: 10
   healing: 25
+  skillName: 
+  description: 

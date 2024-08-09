@@ -27,7 +27,7 @@ public class SkillSlot : MonoBehaviour
     {
         if (isCoolingDown && fillImage.fillAmount > 0)
         {
-            fillImage.fillAmount -= startFillAmount / skill.timeFill * Time.deltaTime;
+            fillImage.fillAmount -= startFillAmount / skill.countdown * Time.deltaTime;
         }
         if (fillImage.fillAmount <= 0)
         {

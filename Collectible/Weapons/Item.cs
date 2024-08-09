@@ -12,4 +12,5 @@ public class Item : ScriptableObject
     public int buyPrice;
     public int itemWeight;
     public string category;
+    public int dbID;
 }

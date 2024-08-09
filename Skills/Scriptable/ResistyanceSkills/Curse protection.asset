@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bdc9d4ffb59904bba154ac96b738d7, type: 3}
+  m_Name: Curse protection
+  m_EditorClassIdentifier: 
+  key: 0
+  skillPrefab: {fileID: 0}
+  targetImage: {fileID: 0}
+  costMP: 0
+  countdown: 25
+  distance: 5
+  isPlayerToEnemy: 0
+  damage: 0
+  healing: 0
+  skillName: "\u0417\u0430\u0449\u0438\u0442\u0430 \u043E\u0442 \u043F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0439"
+  description: "\u041F\u043E\u0432\u044B\u0448\u0430\u0435\u0442 \u0448\u0430\u043D\u0441
+    \u043E\u0442\u043C\u0435\u043D\u044B \u0437\u0430\u043A\u043B\u0438\u043D\u0430\u043D\u0438\u0439
+    \u0432\u0435\u0442\u043A\u0438 \"\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0439\""

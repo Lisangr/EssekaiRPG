@@ -11,9 +11,6 @@ public class FacialHairGroupHandler : MonoBehaviour
     private List<List<GameObject>> facialHairGroups; // Список списков объектов
     private int[] currentIndexes; // Массив текущих индексов для каждого списка
 
-    public string serverUrl;
-    public string sceneName;
-
     void Start()
     {
         facialHairGroups = new List<List<GameObject>>();

@@ -11,9 +11,10 @@ public class ItemPickup : MonoBehaviour
     public static Dictionary<string, int> itemInventory = new Dictionary<string, int>(); // Словарь для хранения предметов
     private InventoryUI inventoryUIManager;
     private InventoryWeight inventoryWeight;
-
+    private Inventory inventory; // Добавляем ссылку на Inventory
     private void Awake()
     {
+        inventory = FindObjectOfType<Inventory>(); // Находим Inventory
         inventoryUIManager = FindObjectOfType<InventoryUI>(); // Находим InventoryUIManager
         inventoryWeight = FindObjectOfType<InventoryWeight>(); // Находим InventoryWeight
     }
@@ -44,7 +45,6 @@ public class ItemPickup : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     public void AddItemToInventory()
     {
         if (inventoryWeight.AddWeight(item.itemWeight)) // добавлено для веса
@@ -54,12 +54,17 @@ public class ItemPickup : MonoBehaviour
             {
                 // Если предмет уже есть в словаре, увеличиваем его количество
                 itemInventory[itemName] += itemQuantity;
+                inventory.SendInventoryData(item);
             }
             else
             {
                 // Если предмета нет в словаре, добавляем его
                 itemInventory.Add(itemName, itemQuantity);
+                inventory.SendInventoryData(item);
             }
+
+            // Отправляем данные о текущем состоянии инвентаря
+            
 
             Debug.Log($"Added item: {itemName} to inventory. Total quantity: {itemInventory[itemName]}");
 
@@ -70,4 +75,32 @@ public class ItemPickup : MonoBehaviour
             }
         }
     }
+    /*
+    public void AddItemToInventory()
+    {
+        if (inventoryWeight.AddWeight(item.itemWeight)) // добавлено для веса
+        {
+            // Проверяем, есть ли предмет уже в инвентаре
+            if (itemInventory.ContainsKey(itemName))
+            {
+                // Если предмет уже есть в словаре, увеличиваем его количество
+                itemInventory[itemName] += itemQuantity;
+                inventory.SendInventoryData(item);
+            }
+            else
+            {
+                // Если предмета нет в словаре, добавляем его
+                itemInventory.Add(itemName, itemQuantity);
+                inventory.SendInventoryData(item, itemName);
+            }
+
+            Debug.Log($"Added item: {itemName} to inventory. Total quantity: {itemInventory[itemName]}");
+
+            // Обновляем UI инвентаря, если он активен
+            if (inventoryUIManager != null && inventoryUIManager.gameObject.activeInHierarchy)
+            {
+                inventoryUIManager.UpdateUI();
+            }
+        }
+    }*/
 }    
