@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 0
   skillPrefab: {fileID: 0}
-  targetImage: {fileID: 0}
+  targetImage: {fileID: 21300000, guid: aa274d74ac087424ca29638326affd0f, type: 3}
   costMP: 0
   countdown: 14
   distance: 25

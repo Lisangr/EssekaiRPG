@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewSkill", menuName = "Skills/Skill")]
 public class SkillSO : ScriptableObject
-{
-    public KeyCode key;
+{   
     public GameObject skillPrefab;
     public Sprite targetImage;
 
