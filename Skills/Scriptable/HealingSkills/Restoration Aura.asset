@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36bdc9d4ffb59904bba154ac96b738d7, type: 3}
   m_Name: Restoration Aura
   m_EditorClassIdentifier: 
-  key: 0
   skillPrefab: {fileID: 0}
-  targetImage: {fileID: 0}
+  targetImage: {fileID: 21300000, guid: 30237e34df7fcc04d9165b0f98ddb5a2, type: 3}
   costMP: 0
   countdown: 1
   distance: 20
