@@ -29,6 +29,7 @@ public class EnemyDetector : MonoBehaviour
         enemyMainInfo = GetComponent<EnemyMainInfo>();
         animator = GetComponent<Animator>();
         playerIsOurTarget = false;
+        
     }
 
     private void Update()
@@ -102,7 +103,7 @@ public class EnemyDetector : MonoBehaviour
             }
         }
 
-        if (!enemyFound)
+        if (!enemyFound && playerIsOurTarget)
         {
             playerIsOurTarget = false;
         }
@@ -124,7 +125,7 @@ public class EnemyDetector : MonoBehaviour
 
         return false;
     }
-
+    
     public void OnEnemyHit(Transform enemy)
     {
         if (navMeshAgent != null && playerTransform != null)
@@ -137,7 +138,7 @@ public class EnemyDetector : MonoBehaviour
             playerIsOurTarget = false;
         }
     }
-
+    
     void FindAndChopTree()
     {
         if (trees.Length == 0) return;
